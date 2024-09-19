@@ -1,5 +1,4 @@
-# HW library
-# RFID and 232 library
+# RS232 communication library
 
 from serial import Serial, serialutil
 from ctypes import windll
@@ -11,12 +10,12 @@ msg_show = 1
 ser = Serial()
 
 
-class Hw:
+class Rs232:
     """
-    Hardware handling for RFID reader and RS232.
-    :param com: COM
-    :param baud: BAUD
-    :param timeout: timeout
+    Hardware handling for RS232.
+    :param com: COM of instrument
+    :param baud: BAUD of instrument
+    :param timeout: timeout for communication
     """
     def __init__(self, com, baud, timeout):
         # input of COM and BAUD
@@ -24,7 +23,7 @@ class Hw:
         self.BAUD = baud
         self.timeout = timeout
 
-    def rs232_open(self):
+    def open(self):
         """
         Open the RS232
         """
@@ -37,10 +36,10 @@ class Hw:
                 Logger.log_event(Logger(), 'RS232 reader at ' + self.COM +
                                  ' doesnt work' + format_exc())
 
-    def rs232_write(self, command):
+    def write(self, command):
         """
         RS232 write
-        :param command: command
+        :param command: command which zou want to send
         :return: serial_string
         """
         try:
@@ -48,13 +47,13 @@ class Hw:
 
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
-            Hw.rs232_close()
+            Rs232.close()
             global msg_show
             msg_show = 0
-            Hw.rs232_open(Hw(self.COM, self.BAUD, self.timeout))
+            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout))
             msg_show = 1
 
-    def rs232_read(self):
+    def read(self):
         """
         RS232 read
         :return: serial_string
@@ -66,14 +65,14 @@ class Hw:
             return serial_string
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
-            Hw.rs232_close()
+            Rs232.close()
             global msg_show
             msg_show = 0
-            Hw.rs232_open(Hw(self.COM, self.BAUD, self.timeout))
+            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout))
             msg_show = 1
 
     @staticmethod
-    def rs232_close():
+    def close():
         """
         Close the RS232
         """
