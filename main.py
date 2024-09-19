@@ -1,6 +1,6 @@
 # TesterAPP
 
-# TODO
+# TODO:
 #  Multithreading for parallel testing
 #  GUI with dynamic UI for testing
 #  Config file stored on server
