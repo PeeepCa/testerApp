@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.001">
-      <change afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.002&#10;- Added new libraries">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +47,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.config_library.executor": "Run",
+    "Python.main.executor": "Run",
     "Python.sequence_library.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
@@ -65,7 +68,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-8336bb23522e-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19072.16" />
+        <option value="bundled-python-sdk-884f5ed5d46b-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.22855.92" />
       </set>
     </attachedChunks>
   </component>
@@ -118,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726757952110</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="v0.002&#10;- Added new libraries">
+      <option name="closed" value="true" />
+      <created>1727086036691</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727086036691</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,6 +147,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Start" />
     <MESSAGE value="v0.001" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.001" />
+    <MESSAGE value="v0.002&#10;- Added new libraries" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.002&#10;- Added new libraries" />
   </component>
 </project>
