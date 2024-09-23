@@ -7,7 +7,7 @@
 # TODO:
 #  Multithreading for parallel testing
 #  GUI with dynamic UI for testing
-#  Config file stored on server
+#  ** Config file stored on server - Done
 #  Auto updating like PEPO
 #  ** Logging to server log file - reused from PEPO
 #  Error handling inside the APP
@@ -50,9 +50,11 @@ class Main:
             windll.user32.MessageBoxW(0, 'Error 0x100 Config file not found', 'Error', 0x1000)
             Logger.log_event(Logger(), 'Error 0x100 Config file not found. ' + format_exc())
             sys.exit()
-        # TODO:
-        #  Read config file and fill variables
-        pass
+        self.stationNumber = temp[0]
+        self.restAPI = temp[1]
+        self.useITAC = temp[2]
+        self.processLayer = temp[3]
+
 
     @staticmethod
     def test(self):

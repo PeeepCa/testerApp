@@ -22,25 +22,15 @@ class Sequence:
             for sequence_step in self.sequence_file:
                 print(sequence_step)
                 match sequence_step.split('.')[0]:
-                    case '1':
-                        print('1')
-                    case '2':
-                        print('2')
-                    case '3':
-                        print('3')
-                    case '4':
-                        print('4')
-                    case '5':
-                        print('5')
-                    case '6':
-                        print('6')
+                    case '':
+                        continue
                     case 'ITAC':
                         match sequence_step.split('.')[1]:
                             case 'LOGIN':
-                                print(Itac.login(Itac('40010011', 'http://acz-itac/mes/imsapi/rest/actions/')))
+                                Itac.login(Itac('40010011', 'http://acz-itac/mes/imsapi/rest/actions/'))
                                 print('LOGIN DONE')
                             case 'LOGOUT':
-                                print(Itac.logout(Itac('40010011', 'http://acz-itac/mes/imsapi/rest/actions/')))
+                                Itac.logout(Itac('40010011', 'http://acz-itac/mes/imsapi/rest/actions/'))
                                 print('LOGOUT DONE')
 
         except (Exception, BaseException):
