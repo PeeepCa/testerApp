@@ -18,6 +18,7 @@
 #  ** Sequence implementation for testing - Partially done
 #  Selftest for relay cards
 #  Relay control from tab in app
+#  Reader AUTO/MANUAL to global variable
 
 import sys
 
@@ -29,6 +30,7 @@ from ctypes import windll
 from lib.sequence_library import Sequence
 from lib.logger_library import Logger
 from lib.config_library import Config
+from lib.rs232_library import Rs232
 
 
 class Main:
@@ -45,7 +47,6 @@ class Main:
                                              + gethostname() + '.ini')
             temp = Config.read_config(Config(self.application_path + '/config/'
                                              + gethostname() + '.ini'))
-            print(temp)
         except FileNotFoundError:
             windll.user32.MessageBoxW(0, 'Error 0x100 Config file not found', 'Error', 0x1000)
             Logger.log_event(Logger(), 'Error 0x100 Config file not found. ' + format_exc())
@@ -54,6 +55,16 @@ class Main:
         self.restAPI = temp[1]
         self.useITAC = temp[2]
         self.processLayer = temp[3]
+        self.useReader = temp[4]
+        self.readerCom = temp[5]
+        self.readerBaud = temp[6]
+        self.readerBytesize = temp[7]
+        self.readerParity = temp[8]
+        self.readerStopbits = temp[9]
+        self.readerTimeout = temp[10]
+
+        if self.useReader:
+            Rs232.open(Rs232(self.readerCom, self.readerBaud, self.readerBytesize, self.readerParity, self.readerStopbits, self.readerTimeout))
 
 
     @staticmethod

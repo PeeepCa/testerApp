@@ -12,15 +12,21 @@ ser = Serial()
 
 class Rs232:
     """
-    Hardware handling for RS232.
+    Hardware handling for RS232.v
     :param com: COM of instrument
     :param baud: BAUD of instrument
+    :param bytesize: bytesize for communication
+    :param parity: parity for communication
+    :param stopbits: stopbits for communication
     :param timeout: timeout for communication
     """
-    def __init__(self, com, baud, timeout):
+    def __init__(self, com, baud, bytesize, parity, stopbits, timeout):
         # input of COM and BAUD
         self.COM = com
         self.BAUD = baud
+        self.bytesize = bytesize
+        self.parity = parity
+        self.stopbits = stopbits
         self.timeout = timeout
 
     def open(self):
@@ -28,7 +34,7 @@ class Rs232:
         Open the RS232
         """
         try:
-            globals()['ser'] = Serial(self.COM, self.BAUD, timeout=self.timeout)
+            globals()['ser'] = Serial(self.COM, baudrate=self.BAUD, bytesize=self.bytesize, parity=self.parity, stopbits=self.stopbits, timeout=self.timeout)
         except serialutil.SerialException:
             if msg_show == 1:
                 windll.user32.MessageBoxW(0, 'Error 0x203 RS232 at: ' + self.COM + ' cannot be found.',
@@ -50,7 +56,7 @@ class Rs232:
             Rs232.close()
             global msg_show
             msg_show = 0
-            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout))
+            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits))
             msg_show = 1
 
     def read(self):
@@ -68,7 +74,7 @@ class Rs232:
             Rs232.close()
             global msg_show
             msg_show = 0
-            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout))
+            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits))
             msg_show = 1
 
     @staticmethod

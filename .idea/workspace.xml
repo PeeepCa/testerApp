@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.003&#10;- started with main">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.004&#10;- main init added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -49,6 +51,7 @@
   "keyToString": {
     "Python.config_library.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.reader_library.executor": "Run",
     "Python.sequence_library.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
@@ -137,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727098741936</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="v0.004&#10;- main init added">
+      <option name="closed" value="true" />
+      <created>1727105848870</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727105848870</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +168,7 @@
     <MESSAGE value="v0.001" />
     <MESSAGE value="v0.002&#10;- Added new libraries" />
     <MESSAGE value="v0.003&#10;- started with main" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.003&#10;- started with main" />
+    <MESSAGE value="v0.004&#10;- main init added" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.004&#10;- main init added" />
   </component>
 </project>
