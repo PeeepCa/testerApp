@@ -30,6 +30,9 @@ class Sequence:
                                 Rs232.write(self, 'LON,01\r')
                                 print(Rs232.read(self))
                                 Rs232.write(self, 'LOFF\r')
+                            case 'MANUAL':
+                                # TODO: implement manual
+                                pass
 
 
 
