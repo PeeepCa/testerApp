@@ -1,7 +1,10 @@
+import lib.shared_varriables
+
 from lib.logger_library import Logger
 from ctypes import windll
 from traceback import format_exc
 from lib.rs232_library import Rs232
+from tkinter import simpledialog
 
 
 class Sequence:
@@ -23,15 +26,13 @@ class Sequence:
                 match sequence_step.split('.')[0]:
                     case '' | ' ' | None | '#':
                         continue
-                    case 'READER':
-                        match sequence_step.split('.')[1]:
-                            case 'AUTO':
-                                Rs232.write(self, 'LON,01\r')
-                                print(Rs232.read(self))
-                                Rs232.write(self, 'LOFF\r')
-                            case 'MANUAL':
-                                # TODO: implement manual
-                                pass
+                    case 'READ_SN':
+                        if lib.shared_varriables.useReader:
+                            Rs232.write(self, 'LON,01\r')
+                            lib.shared_varriables.serial_number = str(Rs232.read(self))
+                            Rs232.write(self, 'LOFF\r')
+                        else:
+                            lib.shared_varriables.serial_number = simpledialog.askstring("New Item", "Enter name of item:")
 
         except (Exception, BaseException):
             windll.user32.MessageBoxW(0, 'Error 0x100 Undefined error in sequence call.' + format_exc(), 'Error', 0x1000)

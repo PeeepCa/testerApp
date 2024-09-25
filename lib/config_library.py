@@ -37,7 +37,7 @@ class Config:
                     case '##': continue
                     case 'stationNumber': self.station_number = config_content.split('=')[1]
                     case 'restApi': self.rest_api = config_content.split('=')[1]
-                    case 'Itac':
+                    case 'itac':
                         self.use_itac = config_content.split('=')[1]
                         if self.use_itac == 'True': self.use_itac = True
                     case 'processLayer': self.process_layer = config_content.split('=')[1]

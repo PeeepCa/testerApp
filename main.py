@@ -21,6 +21,7 @@
 #  Reader AUTO/MANUAL to global variable
 
 import sys
+import lib.shared_varriables
 
 from socket import gethostname
 from os import path
@@ -44,8 +45,6 @@ class Main:
         else:
             self.application_path = None
         try:
-            print(self.application_path.rsplit('\\', 1)[0] + '/config/'
-                                             + gethostname() + '.ini')
             temp = Config.read_config(Config(self.application_path + '/config/'
                                              + gethostname() + '.ini'))
         except FileNotFoundError:
@@ -63,6 +62,8 @@ class Main:
         self.readerParity = temp[8]
         self.readerStopbits = temp[9]
         self.readerTimeout = temp[10]
+        lib.shared_varriables.useReader = self.useReader
+        lib.shared_varriables.useITAC = self.useITAC
 
         if self.useReader:
             Rs232.open(Rs232(self.readerCom, self.readerBaud, self.readerBytesize, self.readerParity, self.readerStopbits, self.readerTimeout))
@@ -73,6 +74,6 @@ class Main:
     def test(__):
         # test procedure
         Sequence.sequence_read(Sequence('main.program'))
-        pass
+        print(lib.shared_varriables.serial_number)
 
 Main.test(Main())

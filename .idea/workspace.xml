@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.006&#10;- config reader&#10;- reader implemented">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.007&#10;- init for itac and reader">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shared_varriables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_varriables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,19 +48,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.config_library.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.reader_library.executor": "Run",
-    "Python.sequence_library.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp/lib",
-    "settings.editor.selected.configurable": "com.codeium.AppSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.config_library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.reader_library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sequence_library.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp/lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pokorny\OneDrive - APAG Elektronik s.r.o\Documents\GitHub\testerApp\lib" />
@@ -162,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727252691641</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="v0.007&#10;- init for itac and reader">
+      <option name="closed" value="true" />
+      <created>1727273827567</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727273827567</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +195,7 @@
     <MESSAGE value="v0.003&#10;- started with main" />
     <MESSAGE value="v0.004&#10;- main init added" />
     <MESSAGE value="v0.006&#10;- config reader&#10;- reader implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.006&#10;- config reader&#10;- reader implemented" />
+    <MESSAGE value="v0.007&#10;- init for itac and reader" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.007&#10;- init for itac and reader" />
   </component>
 </project>

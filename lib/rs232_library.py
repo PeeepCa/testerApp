@@ -6,9 +6,6 @@ from traceback import format_exc
 
 from lib.logger_library import Logger
 
-msg_show = 1
-ser = Serial()
-
 
 class Rs232:
     """
@@ -28,6 +25,7 @@ class Rs232:
         self.parity = parity
         self.stopbits = stopbits
         self.timeout = timeout
+        globals()['msg_show'] = 1
 
     def open(self):
         """
@@ -36,7 +34,7 @@ class Rs232:
         try:
             globals()['ser'] = Serial(self.COM, baudrate=self.BAUD, bytesize=self.bytesize, parity=self.parity, stopbits=self.stopbits, timeout=self.timeout)
         except serialutil.SerialException:
-            if msg_show == 1:
+            if globals()['msg_show'] == 1:
                 windll.user32.MessageBoxW(0, 'Error 0x203 RS232 at: ' + self.COM + ' cannot be found.',
                                           'HW Error', 0x1000)
                 Logger.log_event(Logger(), 'RS232 reader at ' + self.COM +
@@ -49,15 +47,14 @@ class Rs232:
         :return: serial_string
         """
         try:
-            ser.write(command.encode('utf-8'))
+            globals()['ser'].write(command.encode('utf-8'))
 
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
             Rs232.close()
-            global msg_show
-            msg_show = 0
+            globals()['msg_show'] = 0
             Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits))
-            msg_show = 1
+            globals()['msg_show'] = 1
 
     def read(self):
         """
@@ -66,20 +63,19 @@ class Rs232:
         """
         try:
             # TODO: switch after implementation
-            serial_string = ser.readline()
+            serial_string = globals()['ser'].readline()
             # serial_string = ser.read_until(b'\r\n', 8)
-            return serial_string
+            return serial_string.decode('utf-8')
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
             Rs232.close()
-            global msg_show
-            msg_show = 0
+            globals()['msg_show'] = 0
             Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits))
-            msg_show = 1
+            globals()['msg_show'] = 1
 
     @staticmethod
     def close():
         """
         Close the RS232
         """
-        ser.close()
+        globals()['ser'].close()
