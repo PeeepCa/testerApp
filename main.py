@@ -31,6 +31,7 @@ from lib.sequence_library import Sequence
 from lib.logger_library import Logger
 from lib.config_library import Config
 from lib.rs232_library import Rs232
+from lib.itac_library import Itac
 
 
 class Main:
@@ -65,10 +66,11 @@ class Main:
 
         if self.useReader:
             Rs232.open(Rs232(self.readerCom, self.readerBaud, self.readerBytesize, self.readerParity, self.readerStopbits, self.readerTimeout))
-
+        if self.useITAC:
+            Itac.login(Itac(self.stationNumber, self.restAPI))
 
     @staticmethod
-    def test(self):
+    def test(__):
         # test procedure
         Sequence.sequence_read(Sequence('main.program'))
         pass

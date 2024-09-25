@@ -1,4 +1,3 @@
-from lib.itac_library import Itac
 from lib.logger_library import Logger
 from ctypes import windll
 from traceback import format_exc
@@ -33,8 +32,6 @@ class Sequence:
                             case 'MANUAL':
                                 # TODO: implement manual
                                 pass
-
-
 
         except (Exception, BaseException):
             windll.user32.MessageBoxW(0, 'Error 0x100 Undefined error in sequence call.' + format_exc(), 'Error', 0x1000)
