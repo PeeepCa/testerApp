@@ -40,10 +40,12 @@ class Config:
                     case 'itac':
                         self.use_itac = config_content.split('=')[1]
                         if self.use_itac == 'True': self.use_itac = True
+                        else: self.use_itac = False
                     case 'processLayer': self.process_layer = config_content.split('=')[1]
                     case 'useReader':
                         self.use_reader = config_content.split('=')[1]
                         if self.use_reader == 'True': self.use_reader = True
+                        else: self.use_reader = False
                     case 'readerCom': self.reader_com = config_content.split('=')[1]
                     case 'readerBaud': self.reader_baud = config_content.split('=')[1]
                     case 'readerTimeout': self.reader_timeout = config_content.split('=')[1]

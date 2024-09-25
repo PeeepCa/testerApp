@@ -1,4 +1,4 @@
-import lib.shared_varriables
+import lib.shared_variables as shared_variables
 
 from lib.logger_library import Logger
 from ctypes import windll
@@ -27,14 +27,14 @@ class Sequence:
                     case '' | ' ' | None | '#':
                         continue
                     case 'READ_SN':
-                        if lib.shared_varriables.useReader:
+                        if shared_variables.useReader:
                             Rs232.write(self, 'LON,01\r')
-                            lib.shared_varriables.serial_number = str(Rs232.read(self))
+                            shared_variables.serial_number = str(Rs232.read(self))
                             Rs232.write(self, 'LOFF\r')
                         else:
-                            lib.shared_varriables.serial_number = simpledialog.askstring("New Item", "Enter name of item:")
+                            shared_variables.serial_number = simpledialog.askstring("New Item", "Enter name of item:")
 
         except (Exception, BaseException):
-            windll.user32.MessageBoxW(0, 'Error 0x100 Undefined error in sequence call.' + format_exc(), 'Error', 0x1000)
-            Logger.log_event(Logger(), 'Error 0x100 Undefined error in sequence call. ' + format_exc())
+            windll.user32.MessageBoxW(0, 'Error 0x300 Undefined error in sequence call.' + format_exc(), 'Error', 0x1000)
+            Logger.log_event(Logger(), 'Error 0x300 Undefined error in sequence call. ' + format_exc())
 

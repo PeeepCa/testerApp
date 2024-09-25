@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.007&#10;- init for itac and reader">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.009&#10;- fixed readers&#10;- added some global vars">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/config_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared_varriables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_varriables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shared_varriables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_variables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727273827567</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="v0.009&#10;- fixed readers&#10;- added some global vars">
+      <option name="closed" value="true" />
+      <created>1727278120765</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727278120765</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +203,7 @@
     <MESSAGE value="v0.004&#10;- main init added" />
     <MESSAGE value="v0.006&#10;- config reader&#10;- reader implemented" />
     <MESSAGE value="v0.007&#10;- init for itac and reader" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.007&#10;- init for itac and reader" />
+    <MESSAGE value="v0.009&#10;- fixed readers&#10;- added some global vars" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.009&#10;- fixed readers&#10;- added some global vars" />
   </component>
 </project>
