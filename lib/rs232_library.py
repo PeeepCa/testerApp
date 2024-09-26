@@ -27,12 +27,13 @@ class Rs232:
         self.timeout = timeout
         globals()['msg_show'] = 1
 
-    def open(self):
+    def open(self, com_number):
         """
         Open the RS232
+        :param com_number: COM number
         """
         try:
-            globals()['ser'] = Serial(self.COM, baudrate=self.BAUD, bytesize=self.bytesize, parity=self.parity, stopbits=self.stopbits, timeout=self.timeout)
+            globals()['ser' + str(com_number)] = Serial(self.COM, baudrate=self.BAUD, bytesize=self.bytesize, parity=self.parity, stopbits=self.stopbits, timeout=self.timeout)
         except serialutil.SerialException:
             if globals()['msg_show'] == 1:
                 windll.user32.MessageBoxW(0, 'Error 0x203 RS232 at: ' + self.COM + ' cannot be found.',
@@ -40,42 +41,45 @@ class Rs232:
                 Logger.log_event(Logger(), 'RS232 reader at ' + self.COM +
                                  ' doesnt work' + format_exc())
 
-    def write(self, command):
+    def write(self, command, com_number):
         """
         RS232 write
         :param command: command which zou want to send
+        :param com_number: COM number
         :return: serial_string
         """
         try:
-            globals()['ser'].write(command.encode('utf-8'))
-
+            command = command.encode('utf-8').replace(b'\\r', b'\r')
+            globals()['ser' + str(com_number)].write(command)
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
-            Rs232.close()
+            Rs232.close(com_number)
             globals()['msg_show'] = 0
-            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits))
+            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits), com_number)
             globals()['msg_show'] = 1
 
-    def read(self):
+    def read(self, com_number):
         """
         RS232 read
+        :param com_number: COM number
         :return: serial_string
         """
         try:
             # TODO: switch after implementation
-            serial_string = globals()['ser'].readline()
+            serial_string = globals()['ser' + str(com_number)].readline()
             # serial_string = ser.read_until(b'\r\n', 8)
             return serial_string.decode('utf-8')
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
-            Rs232.close()
+            Rs232.close(com_number)
             globals()['msg_show'] = 0
-            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits))
+            Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits), com_number)
             globals()['msg_show'] = 1
 
     @staticmethod
-    def close():
+    def close(com_number):
         """
+        :param com_number: COM number
         Close the RS232
         """
-        globals()['ser'].close()
+        globals()['ser' + str(com_number)].close()
