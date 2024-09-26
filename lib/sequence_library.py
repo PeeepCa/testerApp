@@ -1,3 +1,4 @@
+import lib.shared_variables
 import lib.shared_variables as shared_variables
 
 from lib.logger_library import Logger
@@ -89,6 +90,7 @@ class Sequence:
                         pass
         except (Exception, BaseException):
             print('Error 0x200 Undefined error in sequence call. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x200 Undefined error in sequence call. ' + format_exc())
 
     def preuut_read(self):
         """
@@ -110,11 +112,15 @@ class Sequence:
                                                  globals()['serialParity' + self.sequence_file[i].split(',')[2]],
                                                  int(globals()['serialStopbits' + self.sequence_file[i].split(',')[2]]),
                                                  int(globals()['serialTimeout' + self.sequence_file[i].split(',')[2]])), self.thread_number)
+                            case _:
+                                pass
                     case 'wait':
                         sleep(int(self.sequence_file[i].split(',')[3]))
-
+                    case _:
+                        pass
         except (Exception, BaseException):
             print('Error 0x200 Undefined error in sequence call. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x200 Undefined error in sequence call. ' + format_exc())
 
     def sequence_read(self):
         """
@@ -132,11 +138,18 @@ class Sequence:
                             case 'write':
                                 Rs232.write(self, str(self.sequence_file[i].split(',')[4]), self.sequence_file[i].split(',')[2])
                             case 'read':
-                                Rs232.read(self, str(self.sequence_file[i].split(',')[2]))
+                                globals()[str(self.sequence_file[i].split(',')[4])] = Rs232.read(self, str(self.sequence_file[i].split(',')[2]))
+                                if str(self.sequence_file[i].split(',')[4]) == 'serial_number':
+                                    lib.shared_variables.serial_number = globals()[str('serial_number')]
+                            case _:
+                                pass
                     case 'wait':
                         sleep(int(self.sequence_file[i].split(',')[3]))
+                    case _:
+                        pass
         except (Exception, BaseException):
             print('Error 0x200 Undefined error in sequence call. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x200 Undefined error in sequence call. ' + format_exc())
 
     def postuut_read(self):
         """
@@ -153,8 +166,11 @@ class Sequence:
                         match self.sequence_file[i].split(',')[3]:
                             case 'close':
                                 Rs232.close(self.sequence_file[i].split(',')[2])
-
+                            case _:
+                                pass
+                    case _:
+                        pass
         except (Exception, BaseException):
-            windll.user32.MessageBoxW(0, 'Error 0x300 Undefined error in sequence call.' + format_exc(), 'Error', 0x1000)
+            print('Error 0x200 Undefined error in sequence call. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x300 Undefined error in sequence call. ' + format_exc())
 

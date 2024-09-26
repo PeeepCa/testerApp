@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.010&#10;- fixed config readout">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_variables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727279761037</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file">
+      <option name="closed" value="true" />
+      <created>1727358427448</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1727358427448</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,6 +220,7 @@
     <MESSAGE value="v0.007&#10;- init for itac and reader" />
     <MESSAGE value="v0.009&#10;- fixed readers&#10;- added some global vars" />
     <MESSAGE value="v0.010&#10;- fixed config readout" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.010&#10;- fixed config readout" />
+    <MESSAGE value="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file" />
   </component>
 </project>

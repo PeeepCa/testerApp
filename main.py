@@ -39,9 +39,15 @@ class Main:
 
     @staticmethod
     def test(__):
+        """
+        Test function
+        :param __:
+        :return:
+        """
         # test procedure
         Sequence.settings_read(Sequence('sequence.csv', 1))
         Sequence.preuut_read(Sequence('sequence.csv', 1))
         Sequence.sequence_read(Sequence('sequence.csv', 1))
+        Sequence.postuut_read(Sequence('sequence.csv', 1))
 
 Main.test(Main())
