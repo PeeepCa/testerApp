@@ -1,8 +1,6 @@
 import lib.shared_variables
-import lib.shared_variables as shared_variables
 
 from lib.logger_library import Logger
-from ctypes import windll
 from traceback import format_exc
 from lib.rs232_library import Rs232
 from time import sleep
@@ -32,24 +30,28 @@ class Sequence:
                 self.settings_start = settings_size
             elif '[SETTINGS_END]' in self.sequence_file[settings_size]:
                 self.settings_end = settings_size
+                break
 
         for preuut_size in range(size):
             if '[PREUUT]' in self.sequence_file[preuut_size]:
                 self.preuut_start = preuut_size
             elif '[PREUUT_END]' in self.sequence_file[preuut_size]:
                 self.preuut_end = preuut_size
+                break
 
         for sequence_size in range(size):
             if '[SEQUENCE]' in self.sequence_file[sequence_size]:
                 self.sequence_start = sequence_size
             elif '[SEQUENCE_END]' in self.sequence_file[sequence_size]:
                 self.sequence_end = sequence_size
+                break
 
         for postuut_size in range(size):
             if '[PREUUT]' in self.sequence_file[postuut_size]:
                 self.postuut_start = postuut_size
             elif '[PREUUT_END]' in self.sequence_file[postuut_size]:
                 self.postuut_end = postuut_size
+                break
 
     def settings_read(self):
         """
@@ -138,7 +140,8 @@ class Sequence:
                             case 'write':
                                 Rs232.write(self, str(self.sequence_file[i].split(',')[4]), self.sequence_file[i].split(',')[2])
                             case 'read':
-                                globals()[str(self.sequence_file[i].split(',')[4])] = Rs232.read(self, str(self.sequence_file[i].split(',')[2]))
+                                globals()[str(self.sequence_file[i].split(',')[4])] = (
+                                    Rs232.read(self, str(self.sequence_file[i].split(',')[2])))
                                 if str(self.sequence_file[i].split(',')[4]) == 'serial_number':
                                     lib.shared_variables.serial_number = globals()[str('serial_number')]
                             case _:
