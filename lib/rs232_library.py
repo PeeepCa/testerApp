@@ -36,10 +36,10 @@ class Rs232:
             globals()['ser' + str(com_number)] = Serial(self.COM, baudrate=self.BAUD, bytesize=self.bytesize, parity=self.parity, stopbits=self.stopbits, timeout=self.timeout)
         except serialutil.SerialException:
             if globals()['msg_show'] == 1:
-                windll.user32.MessageBoxW(0, 'Error 0x203 RS232 at: ' + self.COM + ' cannot be found.',
+                windll.user32.MessageBoxW(0, 'Error 0x200 RS232 reader at: ' + self.COM + ' cannot be found.',
                                           'HW Error', 0x1000)
-                Logger.log_event(Logger(), 'RS232 reader at ' + self.COM +
-                                 ' doesnt work' + format_exc())
+                Logger.log_event(Logger(), 'Error 0x200 RS232 reader at ' + self.COM +
+                                 ' cannot be found' + format_exc())
 
     def write(self, command, com_number):
         """

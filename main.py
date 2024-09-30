@@ -3,6 +3,8 @@
 # Error list:
 # 0x000 Undefined error in main.
 # 0x100 Undefined error in sequence call.
+# 0x101 Undefined error in settings call.
+# 0x200 Undefined error in rs232 call.
 
 # TODO:
 #  Multithreading for parallel testing
@@ -45,9 +47,14 @@ class Main:
         :return:
         """
         # test procedure
-        Sequence.settings_read(Sequence('sequence.csv', 1))
-        Sequence.preuut_read(Sequence('sequence.csv', 1))
-        Sequence.sequence_read(Sequence('sequence.csv', 1))
-        Sequence.postuut_read(Sequence('sequence.csv', 1))
+        parsed = Sequence.parse_sequence_file(Sequence('sequence.csv', 1))
+        # Settings
+        Sequence.settings_read(Sequence('sequence.csv', 1),parsed[0], parsed[1])
+        # Preuut
+        Sequence.sequence_read(Sequence('sequence.csv', 1),parsed[2], parsed[3])
+        # Sequence
+        Sequence.sequence_read(Sequence('sequence.csv', 1),parsed[4], parsed[5])
+        # Postuut
+        Sequence.sequence_read(Sequence('sequence.csv', 1),parsed[6], parsed[7])
 
 Main.test(Main())
