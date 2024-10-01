@@ -67,7 +67,7 @@ class Rs232:
         try:
             # TODO: switch after implementation
             serial_string = globals()['ser' + str(com_number)].readline()
-            # serial_string = ser.read_until(b'\r\n', 8)
+            # serial_string = globals()['ser' + str(com_number)].read_until(b'\r\n', 8)
             return serial_string.decode('utf-8')
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
@@ -79,7 +79,7 @@ class Rs232:
     @staticmethod
     def close(com_number):
         """
-        :param com_number: COM number
         Close the RS232
+        :param com_number: COM number
         """
         globals()['ser' + str(com_number)].close()

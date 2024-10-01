@@ -12,8 +12,8 @@
 #  ** Config file stored on server - Done
 #  Auto updating like PEPO
 #  ** Logging to server log file - reused from PEPO
-#  Error handling inside the APP - Done
-#  iTAC via restAPI
+#  ** Error handling inside the APP - Done
+#  ** iTAC via restAPI - Done
 #  SESO via restAPI
 #  ** HW library - rs232 done with timeout which need to be defined
 #  Muster
@@ -22,6 +22,7 @@
 #  Relay control from tab in app
 
 import sys
+import lib.shared_variables
 
 from os import path
 
@@ -47,14 +48,15 @@ class Main:
         :return:
         """
         # test procedure
-        parsed = Sequence.parse_sequence_file(Sequence('sequence.csv', 1))
+        parsed = Sequence.parse_sequence_file(Sequence(), 'sequence.csv')
         # Settings
-        Sequence.settings_read(Sequence('sequence.csv', 1),parsed[0], parsed[1])
+        Sequence.settings_read(Sequence(), parsed[0], parsed[1], parsed[2], 1)
         # Preuut
-        Sequence.sequence_read(Sequence('sequence.csv', 1),parsed[2], parsed[3])
+        Sequence.sequence_read(Sequence(), parsed[0], parsed[3], parsed[4], 1)
         # Sequence
-        Sequence.sequence_read(Sequence('sequence.csv', 1),parsed[4], parsed[5])
+        Sequence.sequence_read(Sequence(), parsed[0], parsed[5], parsed[6], 1)
+        print(lib.shared_variables.serial_number)
         # Postuut
-        Sequence.sequence_read(Sequence('sequence.csv', 1),parsed[6], parsed[7])
+        Sequence.sequence_read(Sequence(), parsed[0], parsed[7], parsed[8], 1)
 
 Main.test(Main())

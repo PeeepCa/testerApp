@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.052&#10;- Reworked sequence calling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sequence.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sequence.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +56,10 @@
     "Python.sequence_library.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
+    "com.google.cloudcode.ide_session_index": "20241001_0000",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp/lib",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "Csv.Editor.Settings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -71,7 +73,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-884f5ed5d46b-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.22855.92" />
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
       </set>
     </attachedChunks>
   </component>
@@ -212,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727361063197</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="v0.052&#10;- Reworked sequence calling">
+      <option name="closed" value="true" />
+      <created>1727685160833</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1727685160833</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,6 +248,7 @@
     <MESSAGE value="v0.009&#10;- fixed readers&#10;- added some global vars" />
     <MESSAGE value="v0.010&#10;- fixed config readout" />
     <MESSAGE value="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.050&#10;- Reworked sequence calling&#10;- Now everything is in sequence file" />
+    <MESSAGE value="v0.052&#10;- Reworked sequence calling" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.052&#10;- Reworked sequence calling" />
   </component>
 </project>
