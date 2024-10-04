@@ -20,9 +20,9 @@
 #  ** Sequence implementation for testing - Done
 #  Selftest for relay cards
 #  Relay control from tab in app
+#  Results implementation
 
 import sys
-import lib.shared_variables
 
 from os import path
 
@@ -50,13 +50,12 @@ class Main:
         # test procedure
         parsed = Sequence.parse_sequence_file(Sequence(), 'sequence.csv')
         # Settings
-        Sequence.settings_read(Sequence(), parsed[0], parsed[1], parsed[2], 1)
+        Sequence.settings_read(parsed[0], parsed[1][0], parsed[1][1], 1)
         # Preuut
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[3], parsed[4], 1)
+        Sequence.sequence_read(Sequence(), parsed[0], parsed[2][0], parsed[2][1], 1)
         # Sequence
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[5], parsed[6], 1)
-        print(lib.shared_variables.serial_number)
+        Sequence.sequence_read(Sequence(), parsed[0], parsed[3][0], parsed[3][1], 1)
         # Postuut
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[7], parsed[8], 1)
+        Sequence.sequence_read(Sequence(), parsed[0], parsed[4][0], parsed[4][1], 1)
 
 Main.test(Main())

@@ -34,12 +34,15 @@ class Rs232:
         """
         try:
             globals()['ser' + str(com_number)] = Serial(self.COM, baudrate=self.BAUD, bytesize=self.bytesize, parity=self.parity, stopbits=self.stopbits, timeout=self.timeout)
+            status = 0
         except serialutil.SerialException:
             if globals()['msg_show'] == 1:
                 windll.user32.MessageBoxW(0, 'Error 0x200 RS232 reader at: ' + self.COM + ' cannot be found.',
                                           'HW Error', 0x1000)
                 Logger.log_event(Logger(), 'Error 0x200 RS232 reader at ' + self.COM +
                                  ' cannot be found' + format_exc())
+            status = 1
+        return  status
 
     def write(self, command, com_number):
         """
@@ -51,12 +54,15 @@ class Rs232:
         try:
             command = command.encode('utf-8').replace(b'\\r', b'\r')
             globals()['ser' + str(com_number)].write(command)
+            status = 0
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
             Rs232.close(com_number)
             globals()['msg_show'] = 0
             Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits), com_number)
             globals()['msg_show'] = 1
+            status = 1
+        return status
 
     def read(self, com_number):
         """
@@ -68,13 +74,16 @@ class Rs232:
             # TODO: switch after implementation
             serial_string = globals()['ser' + str(com_number)].readline()
             # serial_string = globals()['ser' + str(com_number)].read_until(b'\r\n', 8)
-            return serial_string.decode('utf-8')
+            status = 0
         except serialutil.SerialException:
             Logger.log_event(Logger(), 'RS232 reader trying to reconnect. ' + format_exc())
             Rs232.close(com_number)
             globals()['msg_show'] = 0
             Rs232.open(Rs232(self.COM, self.BAUD, self.timeout, self.bytesize, self.parity, self.stopbits), com_number)
             globals()['msg_show'] = 1
+            status = 1
+            serial_string = b''
+        return status, serial_string.decode('utf-8')
 
     @staticmethod
     def close(com_number):

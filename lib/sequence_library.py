@@ -13,61 +13,96 @@ class Sequence:
     Calling the sequence file to process it.
     """
     def __init__(self):
-        self.settings_start = None
-        self.settings_end = None
-        self.preuut_start = None
-        self.preuut_end = None
-        self.sequence_start = None
-        self.sequence_end = None
-        self.postuut_start = None
-        self.postuut_end = None
-        self.sequence_file = None
+        pass
 
-    def parse_sequence_file(self,file):
+    # @staticmethod
+    # def parse_sequence_file(file):
+    #     """
+    #     Parse the sequence file.
+    #     :param file: File to parse
+    #     :return:
+    #     """
+    #     settings_start = 0
+    #     settings_end = 0
+    #     preuut_start = 0
+    #     preuut_end = 0
+    #     sequence_start = 0
+    #     sequence_end = 0
+    #     postuut_start = 0
+    #     postuut_end = 0
+    #
+    #     file = open(file, 'r')
+    #     sequence_file = file.read(-1).splitlines()
+    #     file.close()
+    #
+    #     size = len(sequence_file)
+    #
+    #     for settings_size in range(size):
+    #         if '[SETTINGS]' in sequence_file[settings_size]:
+    #             settings_start = settings_size
+    #         elif '[SETTINGS_END]' in sequence_file[settings_size]:
+    #             settings_end = settings_size
+    #             break
+    #
+    #     for preuut_size in range(size):
+    #         if '[PREUUT]' in sequence_file[preuut_size]:
+    #             preuut_start = preuut_size
+    #         elif '[PREUUT_END]' in sequence_file[preuut_size]:
+    #             preuut_end = preuut_size
+    #             break
+    #
+    #     for sequence_size in range(size):
+    #         if '[SEQUENCE]' in sequence_file[sequence_size]:
+    #             sequence_start = sequence_size
+    #         elif '[SEQUENCE_END]' in sequence_file[sequence_size]:
+    #             sequence_end = sequence_size
+    #             break
+    #
+    #     for postuut_size in range(size):
+    #         if '[POSTUUT]' in sequence_file[postuut_size]:
+    #             postuut_start = postuut_size
+    #         elif '[POSTUUT_END]' in sequence_file[postuut_size]:
+    #             postuut_end = postuut_size
+    #             break
+    #
+    #     return (sequence_file, settings_start, settings_end, preuut_start, preuut_end, sequence_start,
+    #             sequence_end, postuut_start, postuut_end)
+
+    @staticmethod
+    def read_sequence_file(file):
         """
-        Parse the sequence file.
-        :param file: File to parse
+        Read the sequence file.
+        :param file: File to read
         :return:
         """
-
         file = open(file, 'r')
-        self.sequence_file = file.read(-1).splitlines()
+        sequence_file = file.read(-1).splitlines()
         file.close()
+        return sequence_file
 
-        size = len(self.sequence_file)
+    def parse_sequence_file(self, file):
+        sequence_file = self.read_sequence_file(file)
+        sections = {
+            '[SETTINGS]': ('[SETTINGS_END]', 'settings'),
+            '[PREUUT]': ('[PREUUT_END]', 'preuut'),
+            '[SEQUENCE]': ('[SEQUENCE_END]', 'sequence'),
+            '[POSTUUT]': ('[POSTUUT_END]', 'postuut')
+        }
+        section_indices = {}
+        for section_start, (section_end, section_name) in sections.items():
+            start_index = None
+            end_index = None
+            for i, line in enumerate(sequence_file):
+                if section_start in line:
+                    start_index = i
+                elif section_end in line:
+                    end_index = i
+                    break
+            section_indices[section_name] = (start_index, end_index)
+        return sequence_file, *section_indices.values()
 
-        for settings_size in range(size):
-            if '[SETTINGS]' in self.sequence_file[settings_size]:
-                self.settings_start = settings_size
-            elif '[SETTINGS_END]' in self.sequence_file[settings_size]:
-                self.settings_end = settings_size
-                break
-
-        for preuut_size in range(size):
-            if '[PREUUT]' in self.sequence_file[preuut_size]:
-                self.preuut_start = preuut_size
-            elif '[PREUUT_END]' in self.sequence_file[preuut_size]:
-                self.preuut_end = preuut_size
-                break
-
-        for sequence_size in range(size):
-            if '[SEQUENCE]' in self.sequence_file[sequence_size]:
-                self.sequence_start = sequence_size
-            elif '[SEQUENCE_END]' in self.sequence_file[sequence_size]:
-                self.sequence_end = sequence_size
-                break
-
-        for postuut_size in range(size):
-            if '[POSTUUT]' in self.sequence_file[postuut_size]:
-                self.postuut_start = postuut_size
-            elif '[POSTUUT_END]' in self.sequence_file[postuut_size]:
-                self.postuut_end = postuut_size
-                break
-
-        return (self.sequence_file, self.settings_start, self.settings_end, self.preuut_start, self.preuut_end, self.sequence_start,
-                self.sequence_end, self.postuut_start, self.postuut_end)
-
-    def settings_read(self, sequence_file, settings_start, settings_end, thread_number):
+    @staticmethod
+    def settings_read(sequence_file, settings_start, settings_end, thread_number):
         """
         Read the settings from the sequence file.
         :param sequence_file: File to read
@@ -77,39 +112,37 @@ class Sequence:
         :return:
         """
         try:
-            self.sequence_file = sequence_file
             for i in range(settings_start + 1, settings_end):
-                print(self.sequence_file[i])
-                if '##' in self.sequence_file[i]:
+                if '##' in sequence_file[i]:
                     continue
-                if ';;;;' in self.sequence_file[i]:
+                if ';;;;' in sequence_file[i]:
                     continue
-                if int(self.sequence_file[i].split(';')[0]) == int(thread_number):
-                    match self.sequence_file[i].split(';')[1]:
+                if int(sequence_file[i].split(';')[0]) == int(thread_number):
+                    match sequence_file[i].split(';')[1]:
                         case 'stationNumber':
-                            globals()[str('station_number')] = self.sequence_file[i].split(';')[4]
+                            globals()[str('station_number')] = sequence_file[i].split(';')[4]
                         case 'processLayer':
-                            globals()[str('process_layer')] = self.sequence_file[i].split(';')[4]
+                            globals()[str('process_layer')] = sequence_file[i].split(';')[4]
                         case 'restApi':
-                            globals()[str('restApi')] = self.sequence_file[i].split(';')[4]
+                            globals()[str('restApi')] = sequence_file[i].split(';')[4]
                         case 'serialCom':
-                            globals()[str(self.sequence_file[i].split(';')[1] +
-                                          self.sequence_file[i].split(';')[2])] = self.sequence_file[i].split(';')[4]
+                            globals()[str(sequence_file[i].split(';')[1] +
+                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
                         case 'serialBaud':
-                            globals()[str(self.sequence_file[i].split(';')[1] +
-                                          self.sequence_file[i].split(';')[2])] = self.sequence_file[i].split(';')[4]
+                            globals()[str(sequence_file[i].split(';')[1] +
+                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
                         case 'serialBytesize':
-                            globals()[str(self.sequence_file[i].split(';')[1] +
-                                          self.sequence_file[i].split(';')[2])] = self.sequence_file[i].split(';')[4]
+                            globals()[str(sequence_file[i].split(';')[1] +
+                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
                         case 'serialParity':
-                            globals()[str(self.sequence_file[i].split(';')[1] +
-                                          self.sequence_file[i].split(';')[2])] = self.sequence_file[i].split(';')[4]
+                            globals()[str(sequence_file[i].split(';')[1] +
+                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
                         case 'serialStopbits':
-                            globals()[str(self.sequence_file[i].split(';')[1] +
-                                          self.sequence_file[i].split(';')[2])] = self.sequence_file[i].split(';')[4]
+                            globals()[str(sequence_file[i].split(';')[1] +
+                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
                         case 'serialTimeout':
-                            globals()[str(self.sequence_file[i].split(';')[1] +
-                                          self.sequence_file[i].split(';')[2])] = self.sequence_file[i].split(';')[4]
+                            globals()[str(sequence_file[i].split(';')[1] +
+                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
                         case _:
                             pass
                 else:
@@ -118,58 +151,150 @@ class Sequence:
             print('Error 0x101 Undefined error in sequence call. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x101 Undefined error in sequence call. ' + format_exc())
 
+    # def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
+    #     """
+    #     Read the sequence from the sequence file.
+    #     :param sequence_file: File to read
+    #     :param sequence_start: Line for start of sequence
+    #     :param sequence_end: Line for end of sequence
+    #     :param thread_number: Thread number
+    #     :return:
+    #     """
+    #     try:
+    #         for i in range(sequence_start + 1, sequence_end):
+    #             try:
+    #                 previous_status = lib.shared_variables.status
+    #                 if '##' in sequence_file[i]:
+    #                     continue
+    #                 if ';;;;' in sequence_file[i]:
+    #                     continue
+    #                 if int(sequence_file[i].split(';')[0]) == int(thread_number):
+    #                     match sequence_file[i].split(';')[1]:
+    #                         case 'serial':
+    #                             match sequence_file[i].split(';')[3]:
+    #                                 case 'open':
+    #                                     lib.shared_variables.status += Rs232.open(Rs232(globals()['serialCom' + sequence_file[i].split(';')[2]],
+    #                                                      int(globals()['serialBaud' + sequence_file[i].split(';')[2]]),
+    #                                                      int(globals()['serialBytesize' + sequence_file[i].split(';')[2]]),
+    #                                                      globals()['serialParity' + sequence_file[i].split(';')[2]],
+    #                                                      int(globals()['serialStopbits' + sequence_file[i].split(';')[2]]),
+    #                                                      int(globals()['serialTimeout' + sequence_file[i].split(';')[2]])),
+    #                                                sequence_file[i].split(';')[2])
+    #                                 case 'write':
+    #                                     lib.shared_variables.status += Rs232.write(self, str(sequence_file[i].split(';')[4]), sequence_file[i].split(';')[2])
+    #                                 case 'read':
+    #                                     status, globals()[str(sequence_file[i].split(';')[5])] = (
+    #                                         Rs232.read(self, str(sequence_file[i].split(';')[2])))
+    #                                     lib.shared_variables.status += status
+    #                                     if str(sequence_file[i].split(';')[5]) == 'serial_number':
+    #                                         lib.shared_variables.serial_number = globals()[str('serial_number')]
+    #                                 case 'close':
+    #                                     Rs232.close(sequence_file[i].split(';')[2])
+    #                                 case _:
+    #                                     pass
+    #                         case 'itac':
+    #                             match sequence_file[i].split(';')[3]:
+    #                                 case 'login':
+    #                                     Itac.login(Itac(globals()['station_number'], globals()['restApi']))
+    #                                 case 'logout':
+    #                                     Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
+    #                         case 'wait':
+    #                             sleep(int(sequence_file[i].split(';')[4]))
+    #                         case _:
+    #                             pass
+    #                 else:
+    #                     continue
+    #                 if lib.shared_variables.status != previous_status:
+    #                     # noinspection PyUnusedLocal
+    #                     previous_status = lib.shared_variables.status
+    #             except KeyError:
+    #                 Logger.log_event(Logger(), 'Error 0x102 KeyError, global variable not found. ' + format_exc())
+    #                 continue
+    #     except (Exception, BaseException):
+    #         print('Error 0x100 Undefined error in sequence call. ' + format_exc())
+    #         Logger.log_event(Logger(), 'Error 0x100 Undefined error in sequence call. ' + format_exc())
+
     def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
-        """
-        Read the sequence from the sequence file.
-        :param sequence_file: File to read
-        :param sequence_start: Line for start of sequence
-        :param sequence_end: Line for end of sequence
-        :param thread_number: Thread number
-        :return:
-        """
+        for i in range(sequence_start + 1, sequence_end):
+            self.process_sequence_line(sequence_file, i, thread_number)
+
+    def process_sequence_line(self, sequence_file, line_index, thread_number):
+        line = sequence_file[line_index]
+        command = line.split(';')[1]
+        if command == 'serial':
+            self.handle_serial_command(line, thread_number)
+        elif command == 'itac':
+            self.handle_itac_command(line, thread_number)
+        elif command == 'wait':
+            self.handle_wait_command(line, thread_number)
+
+    def handle_serial_command(self, line, thread_number):
         try:
-            self.sequence_file = sequence_file
-            for i in range(sequence_start + 1, sequence_end):
-                print(self.sequence_file[i])
-                if '##' in self.sequence_file[i]:
-                    continue
-                if ';;;;' in self.sequence_file[i]:
-                    continue
-                if int(self.sequence_file[i].split(';')[0]) == int(thread_number):
-                    match self.sequence_file[i].split(';')[1]:
-                        case 'serial':
-                            match self.sequence_file[i].split(';')[3]:
-                                case 'open':
-                                    Rs232.open(Rs232(globals()['serialCom' + self.sequence_file[i].split(';')[2]],
-                                                     int(globals()['serialBaud' + self.sequence_file[i].split(';')[2]]),
-                                                     int(globals()['serialBytesize' + self.sequence_file[i].split(';')[2]]),
-                                                     globals()['serialParity' + self.sequence_file[i].split(';')[2]],
-                                                     int(globals()['serialStopbits' + self.sequence_file[i].split(';')[2]]),
-                                                     int(globals()['serialTimeout' + self.sequence_file[i].split(';')[2]])),
-                                               self.sequence_file[i].split(';')[2])
-                                case 'write':
-                                    Rs232.write(self, str(self.sequence_file[i].split(';')[4]), self.sequence_file[i].split(';')[2])
-                                case 'read':
-                                    globals()[str(self.sequence_file[i].split(';')[5])] = (
-                                        Rs232.read(self, str(self.sequence_file[i].split(';')[2])))
-                                    if str(self.sequence_file[i].split(';')[5]) == 'serial_number':
-                                        lib.shared_variables.serial_number = globals()[str('serial_number')]
-                                case 'close':
-                                    Rs232.close(self.sequence_file[i].split(';')[2])
-                                case _:
-                                    pass
-                        case 'itac':
-                            match self.sequence_file[i].split(';')[3]:
-                                case 'login':
-                                    Itac.login(Itac(globals()['station_number'], globals()['restApi']))
-                                case 'logout':
-                                    Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
-                        case 'wait':
-                            sleep(int(self.sequence_file[i].split(';')[4]))
-                        case _:
-                            pass
-                else:
-                    continue
+            match line.split(';')[3]:
+                case 'open':
+                    self.open_serial(line, thread_number)
+                case 'write':
+                    self.write_serial(line, thread_number)
+                case 'read':
+                    self.read_serial(line, thread_number)
+                case 'close':
+                    self.close_serial(line, thread_number)
+        except KeyError:
+            Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
         except (Exception, BaseException):
-            print('Error 0x100 Undefined error in sequence call. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x200 Undefined error in sequence call. ' + format_exc())
+            print('Error 0x101 Undefined error in serial command. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
+
+    def handle_itac_command(self, line, thread_number):
+        try:
+            match line.split(';')[3]:
+                case 'login':
+                    self.login_itac(thread_number)
+                case 'logout':
+                    self.logout_itac(thread_number)
+        except (Exception, BaseException):
+            print('Error 0x102 Undefined error in itac command. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x102 Undefined error in itac command. ' + format_exc())
+
+    def handle_wait_command(self, line, thread_number):
+        try:
+            self.wait(line, thread_number)
+        except (Exception, BaseException):
+            print('Error 0x103 Undefined error in wait command. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x103 Undefined error in wait command. ' + format_exc())
+
+    @staticmethod
+    def open_serial(line, thread_number):
+        lib.shared_variables.status += Rs232.open(Rs232(globals()['serialCom' + line.split(';')[2]],
+                                                             int(globals()['serialBaud' + line.split(';')[2]]),
+                                                             int(globals()['serialBytesize' + line.split(';')[2]]),
+                                                             globals()['serialParity' + line.split(';')[2]],
+                                                             int(globals()['serialStopbits' + line.split(';')[2]]),
+                                                             int(globals()['serialTimeout' + line.split(';')[2]])),
+                                                       line.split(';')[2])
+
+    def write_serial(self, line, thread_number):
+        lib.shared_variables.status += Rs232.write(self, str(line.split(';')[4]),
+                                                   line.split(';')[2])
+
+    def read_serial(self, line, thread_number):
+        status, globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2])))
+        lib.shared_variables.status += status
+        if str(line.split(';')[5]) == 'serial_number':
+            lib.shared_variables.serial_number = globals()[str('serial_number')]
+
+    @staticmethod
+    def close_serial(line, thread_number):
+        Rs232.close(line.split(';')[2])
+
+    @staticmethod
+    def login_itac(thread_number):
+        Itac.login(Itac(globals()['station_number'], globals()['restApi']))
+
+    @staticmethod
+    def logout_itac(thread_number):
+        Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
+
+    @staticmethod
+    def wait(line, thread_number):
+        sleep(int(line.split(';')[4]))
