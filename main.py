@@ -1,11 +1,3 @@
-# TesterAPP
-
-# Error list:
-# 0x000 Undefined error in main.
-# 0x100 Undefined error in sequence call.
-# 0x101 Undefined error in settings call.
-# 0x200 Undefined error in rs232 call.
-
 # TODO:
 #  Multithreading for parallel testing
 #  GUI with dynamic UI for testing

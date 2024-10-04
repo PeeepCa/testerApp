@@ -115,9 +115,9 @@ class Sequence:
             for i in range(settings_start + 1, settings_end):
                 if '##' in sequence_file[i]:
                     continue
-                if ';;;;' in sequence_file[i]:
+                elif ';;;;' in sequence_file[i]:
                     continue
-                if int(sequence_file[i].split(';')[0]) == int(thread_number):
+                elif int(sequence_file[i].split(';')[0]) == int(thread_number):
                     match sequence_file[i].split(';')[1]:
                         case 'stationNumber':
                             globals()[str('station_number')] = sequence_file[i].split(';')[4]
@@ -149,7 +149,7 @@ class Sequence:
                     continue
         except (Exception, BaseException):
             print('Error 0x101 Undefined error in sequence call. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x101 Undefined error in sequence call. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x104 Undefined error in sequence call. ' + format_exc())
 
     # def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
     #     """
@@ -220,51 +220,54 @@ class Sequence:
 
     def process_sequence_line(self, sequence_file, line_index, thread_number):
         line = sequence_file[line_index]
-        command = line.split(';')[1]
-        if command == 'serial':
-            self.handle_serial_command(line, thread_number)
-        elif command == 'itac':
-            self.handle_itac_command(line, thread_number)
-        elif command == 'wait':
-            self.handle_wait_command(line, thread_number)
+        if line.split(';')[0] == str(thread_number):
+            match line.split(';')[1]:
+                case 'serial':
+                    self.handle_serial_command(line)
+                case 'itac':
+                    self.handle_itac_command(line)
+                case 'wait':
+                    self.handle_wait_command(line)
+                case _:
+                    pass
 
-    def handle_serial_command(self, line, thread_number):
+    def handle_serial_command(self, line):
         try:
             match line.split(';')[3]:
                 case 'open':
-                    self.open_serial(line, thread_number)
+                    self.open_serial(line)
                 case 'write':
-                    self.write_serial(line, thread_number)
+                    self.write_serial(line)
                 case 'read':
-                    self.read_serial(line, thread_number)
+                    self.read_serial(line)
                 case 'close':
-                    self.close_serial(line, thread_number)
+                    self.close_serial(line)
         except KeyError:
             Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
         except (Exception, BaseException):
             print('Error 0x101 Undefined error in serial command. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
 
-    def handle_itac_command(self, line, thread_number):
+    def handle_itac_command(self, line):
         try:
             match line.split(';')[3]:
                 case 'login':
-                    self.login_itac(thread_number)
+                    self.login_itac()
                 case 'logout':
-                    self.logout_itac(thread_number)
+                    self.logout_itac()
         except (Exception, BaseException):
             print('Error 0x102 Undefined error in itac command. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x102 Undefined error in itac command. ' + format_exc())
 
-    def handle_wait_command(self, line, thread_number):
+    def handle_wait_command(self, line):
         try:
-            self.wait(line, thread_number)
+            self.wait(line)
         except (Exception, BaseException):
             print('Error 0x103 Undefined error in wait command. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x103 Undefined error in wait command. ' + format_exc())
 
     @staticmethod
-    def open_serial(line, thread_number):
+    def open_serial(line):
         lib.shared_variables.status += Rs232.open(Rs232(globals()['serialCom' + line.split(';')[2]],
                                                              int(globals()['serialBaud' + line.split(';')[2]]),
                                                              int(globals()['serialBytesize' + line.split(';')[2]]),
@@ -273,28 +276,28 @@ class Sequence:
                                                              int(globals()['serialTimeout' + line.split(';')[2]])),
                                                        line.split(';')[2])
 
-    def write_serial(self, line, thread_number):
+    def write_serial(self, line):
         lib.shared_variables.status += Rs232.write(self, str(line.split(';')[4]),
                                                    line.split(';')[2])
 
-    def read_serial(self, line, thread_number):
+    def read_serial(self, line):
         status, globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2])))
         lib.shared_variables.status += status
         if str(line.split(';')[5]) == 'serial_number':
             lib.shared_variables.serial_number = globals()[str('serial_number')]
 
     @staticmethod
-    def close_serial(line, thread_number):
+    def close_serial(line):
         Rs232.close(line.split(';')[2])
 
     @staticmethod
-    def login_itac(thread_number):
+    def login_itac():
         Itac.login(Itac(globals()['station_number'], globals()['restApi']))
 
     @staticmethod
-    def logout_itac(thread_number):
+    def logout_itac():
         Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
 
     @staticmethod
-    def wait(line, thread_number):
+    def wait(line):
         sleep(int(line.split(';')[4]))
