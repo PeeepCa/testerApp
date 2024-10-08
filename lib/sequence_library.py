@@ -81,6 +81,11 @@ class Sequence:
         return sequence_file
 
     def parse_sequence_file(self, file):
+        """
+        Parse the sequence file.
+        :param file: File to parse
+        :return:
+        """
         sequence_file = self.read_sequence_file(file)
         sections = {
             '[SETTINGS]': ('[SETTINGS_END]', 'settings'),
@@ -215,10 +220,25 @@ class Sequence:
     #         Logger.log_event(Logger(), 'Error 0x100 Undefined error in sequence call. ' + format_exc())
 
     def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
+        """
+        Read the sequence from the sequence file.
+        :param sequence_file: File to read
+        :param sequence_start: Line for start of sequence
+        :param sequence_end: Line for end of sequence
+        :param thread_number: Thread number
+        :return:
+        """
         for i in range(sequence_start + 1, sequence_end):
             self.process_sequence_line(sequence_file, i, thread_number)
 
     def process_sequence_line(self, sequence_file, line_index, thread_number):
+        """
+        Process the line in the sequence file.
+        :param sequence_file: File to read
+        :param line_index: Line to process
+        :param thread_number: Thread number
+        :return:
+        """
         line = sequence_file[line_index]
         if line.split(';')[0] == str(thread_number):
             match line.split(';')[1]:
@@ -232,6 +252,11 @@ class Sequence:
                     pass
 
     def handle_serial_command(self, line):
+        """
+        Handle the serial command.
+        :param line: Line read
+        :return:
+        """
         try:
             match line.split(';')[3]:
                 case 'open':
@@ -249,6 +274,11 @@ class Sequence:
             Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
 
     def handle_itac_command(self, line):
+        """
+        Handle the itac command.
+        :param line: Line read
+        :return:
+        """
         try:
             match line.split(';')[3]:
                 case 'login':
@@ -260,6 +290,11 @@ class Sequence:
             Logger.log_event(Logger(), 'Error 0x102 Undefined error in itac command. ' + format_exc())
 
     def handle_wait_command(self, line):
+        """
+        Handle the wait command.
+        :param line: Line read
+        :return:
+        """
         try:
             self.wait(line)
         except (Exception, BaseException):
@@ -277,10 +312,20 @@ class Sequence:
                                                        line.split(';')[2])
 
     def write_serial(self, line):
+        """
+        Write to the serial port.
+        :param line: Line read
+        :return:
+        """
         lib.shared_variables.status += Rs232.write(self, str(line.split(';')[4]),
                                                    line.split(';')[2])
 
     def read_serial(self, line):
+        """
+        Read from the serial port.
+        :param line: Line read
+        :return:
+        """
         status, globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2])))
         lib.shared_variables.status += status
         if str(line.split(';')[5]) == 'serial_number':
@@ -288,16 +333,34 @@ class Sequence:
 
     @staticmethod
     def close_serial(line):
+        """
+        Close the serial port.
+        :param line: Line read
+        :return:
+        """
         Rs232.close(line.split(';')[2])
 
     @staticmethod
     def login_itac():
+        """
+        Login to iTAC.
+        :return:
+        """
         Itac.login(Itac(globals()['station_number'], globals()['restApi']))
 
     @staticmethod
     def logout_itac():
+        """
+        Logout from iTAC.
+        :return:
+        """
         Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
 
     @staticmethod
     def wait(line):
+        """
+        Wait for given time in milliseconds.
+        :param line: Line read
+        :return:
+        """
         sleep(int(line.split(';')[4]))
