@@ -15,59 +15,6 @@ class Sequence:
     def __init__(self):
         pass
 
-    # @staticmethod
-    # def parse_sequence_file(file):
-    #     """
-    #     Parse the sequence file.
-    #     :param file: File to parse
-    #     :return:
-    #     """
-    #     settings_start = 0
-    #     settings_end = 0
-    #     preuut_start = 0
-    #     preuut_end = 0
-    #     sequence_start = 0
-    #     sequence_end = 0
-    #     postuut_start = 0
-    #     postuut_end = 0
-    #
-    #     file = open(file, 'r')
-    #     sequence_file = file.read(-1).splitlines()
-    #     file.close()
-    #
-    #     size = len(sequence_file)
-    #
-    #     for settings_size in range(size):
-    #         if '[SETTINGS]' in sequence_file[settings_size]:
-    #             settings_start = settings_size
-    #         elif '[SETTINGS_END]' in sequence_file[settings_size]:
-    #             settings_end = settings_size
-    #             break
-    #
-    #     for preuut_size in range(size):
-    #         if '[PREUUT]' in sequence_file[preuut_size]:
-    #             preuut_start = preuut_size
-    #         elif '[PREUUT_END]' in sequence_file[preuut_size]:
-    #             preuut_end = preuut_size
-    #             break
-    #
-    #     for sequence_size in range(size):
-    #         if '[SEQUENCE]' in sequence_file[sequence_size]:
-    #             sequence_start = sequence_size
-    #         elif '[SEQUENCE_END]' in sequence_file[sequence_size]:
-    #             sequence_end = sequence_size
-    #             break
-    #
-    #     for postuut_size in range(size):
-    #         if '[POSTUUT]' in sequence_file[postuut_size]:
-    #             postuut_start = postuut_size
-    #         elif '[POSTUUT_END]' in sequence_file[postuut_size]:
-    #             postuut_end = postuut_size
-    #             break
-    #
-    #     return (sequence_file, settings_start, settings_end, preuut_start, preuut_end, sequence_start,
-    #             sequence_end, postuut_start, postuut_end)
-
     @staticmethod
     def read_sequence_file(file):
         """
@@ -155,69 +102,6 @@ class Sequence:
         except (Exception, BaseException):
             print('Error 0x101 Undefined error in sequence call. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x104 Undefined error in sequence call. ' + format_exc())
-
-    # def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
-    #     """
-    #     Read the sequence from the sequence file.
-    #     :param sequence_file: File to read
-    #     :param sequence_start: Line for start of sequence
-    #     :param sequence_end: Line for end of sequence
-    #     :param thread_number: Thread number
-    #     :return:
-    #     """
-    #     try:
-    #         for i in range(sequence_start + 1, sequence_end):
-    #             try:
-    #                 previous_status = lib.shared_variables.status
-    #                 if '##' in sequence_file[i]:
-    #                     continue
-    #                 if ';;;;' in sequence_file[i]:
-    #                     continue
-    #                 if int(sequence_file[i].split(';')[0]) == int(thread_number):
-    #                     match sequence_file[i].split(';')[1]:
-    #                         case 'serial':
-    #                             match sequence_file[i].split(';')[3]:
-    #                                 case 'open':
-    #                                     lib.shared_variables.status += Rs232.open(Rs232(globals()['serialCom' + sequence_file[i].split(';')[2]],
-    #                                                      int(globals()['serialBaud' + sequence_file[i].split(';')[2]]),
-    #                                                      int(globals()['serialBytesize' + sequence_file[i].split(';')[2]]),
-    #                                                      globals()['serialParity' + sequence_file[i].split(';')[2]],
-    #                                                      int(globals()['serialStopbits' + sequence_file[i].split(';')[2]]),
-    #                                                      int(globals()['serialTimeout' + sequence_file[i].split(';')[2]])),
-    #                                                sequence_file[i].split(';')[2])
-    #                                 case 'write':
-    #                                     lib.shared_variables.status += Rs232.write(self, str(sequence_file[i].split(';')[4]), sequence_file[i].split(';')[2])
-    #                                 case 'read':
-    #                                     status, globals()[str(sequence_file[i].split(';')[5])] = (
-    #                                         Rs232.read(self, str(sequence_file[i].split(';')[2])))
-    #                                     lib.shared_variables.status += status
-    #                                     if str(sequence_file[i].split(';')[5]) == 'serial_number':
-    #                                         lib.shared_variables.serial_number = globals()[str('serial_number')]
-    #                                 case 'close':
-    #                                     Rs232.close(sequence_file[i].split(';')[2])
-    #                                 case _:
-    #                                     pass
-    #                         case 'itac':
-    #                             match sequence_file[i].split(';')[3]:
-    #                                 case 'login':
-    #                                     Itac.login(Itac(globals()['station_number'], globals()['restApi']))
-    #                                 case 'logout':
-    #                                     Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
-    #                         case 'wait':
-    #                             sleep(int(sequence_file[i].split(';')[4]))
-    #                         case _:
-    #                             pass
-    #                 else:
-    #                     continue
-    #                 if lib.shared_variables.status != previous_status:
-    #                     # noinspection PyUnusedLocal
-    #                     previous_status = lib.shared_variables.status
-    #             except KeyError:
-    #                 Logger.log_event(Logger(), 'Error 0x102 KeyError, global variable not found. ' + format_exc())
-    #                 continue
-    #     except (Exception, BaseException):
-    #         print('Error 0x100 Undefined error in sequence call. ' + format_exc())
-    #         Logger.log_event(Logger(), 'Error 0x100 Undefined error in sequence call. ' + format_exc())
 
     def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
         """
