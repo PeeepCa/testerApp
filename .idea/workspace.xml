@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.060&#10;- Reworked sequence library&#10;- Saved before deleting old functions">
-      <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
-    </list>
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.061&#10;- Added docstrings" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -250,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728370623474</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="v0.061&#10;- Added docstrings">
+      <option name="closed" value="true" />
+      <created>1728370708772</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1728370708772</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -279,6 +285,7 @@
     <MESSAGE value="v0.052&#10;- Reworked sequence calling" />
     <MESSAGE value="v0.055&#10;- Reworked sequence calling&#10;- Added thread to sequence" />
     <MESSAGE value="v0.060&#10;- Reworked sequence library&#10;- Saved before deleting old functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.060&#10;- Reworked sequence library&#10;- Saved before deleting old functions" />
+    <MESSAGE value="v0.061&#10;- Added docstrings" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.061&#10;- Added docstrings" />
   </component>
 </project>
