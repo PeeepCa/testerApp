@@ -25,6 +25,9 @@ class Sequence:
         file = open(file, 'r')
         sequence_file = file.read(-1).splitlines()
         file.close()
+        for i in range(len(sequence_file)):
+            lib.shared_variables.step_name = sequence_file[i]
+            sleep(0.1)
         return sequence_file
 
     def parse_sequence_file(self, file):
@@ -52,56 +55,6 @@ class Sequence:
                     break
             section_indices[section_name] = (start_index, end_index)
         return sequence_file, *section_indices.values()
-
-    @staticmethod
-    def settings_read(sequence_file, settings_start, settings_end, thread_number):
-        """
-        Read the settings from the sequence file.
-        :param sequence_file: File to read
-        :param settings_start: Line for start of settings
-        :param settings_end: Line for end of settings
-        :param thread_number: Thread number
-        :return:
-        """
-        try:
-            for i in range(settings_start + 1, settings_end):
-                if '##' in sequence_file[i]:
-                    continue
-                elif ';;;;' in sequence_file[i]:
-                    continue
-                elif int(sequence_file[i].split(';')[0]) == int(thread_number):
-                    match sequence_file[i].split(';')[1]:
-                        case 'stationNumber':
-                            globals()[str('station_number')] = sequence_file[i].split(';')[4]
-                        case 'processLayer':
-                            globals()[str('process_layer')] = sequence_file[i].split(';')[4]
-                        case 'restApi':
-                            globals()[str('restApi')] = sequence_file[i].split(';')[4]
-                        case 'serialCom':
-                            globals()[str(sequence_file[i].split(';')[1] +
-                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
-                        case 'serialBaud':
-                            globals()[str(sequence_file[i].split(';')[1] +
-                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
-                        case 'serialBytesize':
-                            globals()[str(sequence_file[i].split(';')[1] +
-                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
-                        case 'serialParity':
-                            globals()[str(sequence_file[i].split(';')[1] +
-                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
-                        case 'serialStopbits':
-                            globals()[str(sequence_file[i].split(';')[1] +
-                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
-                        case 'serialTimeout':
-                            globals()[str(sequence_file[i].split(';')[1] +
-                                          sequence_file[i].split(';')[2])] = sequence_file[i].split(';')[4]
-                        case _:
-                            pass
-                else:
-                    continue
-        except (Exception, BaseException):
-            print('Error 0x101 Undefined error in sequence call. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x104 Undefined error in sequence call. ' + format_exc())
 
     def sequence_read(self, sequence_file, sequence_start, sequence_end, thread_number):
         """
@@ -132,8 +85,24 @@ class Sequence:
                     self.handle_itac_command(line)
                 case 'wait':
                     self.handle_wait_command(line)
-                case _:
-                    pass
+                case 'stationNumber':
+                    self.handle_settings_static(line)
+                case 'processLayer':
+                    self.handle_settings_static(line)
+                case 'restApi':
+                    self.handle_settings_static(line)
+                case 'serialCom':
+                    self.handle_settings_dynamic(line)
+                case 'serialBaud':
+                    self.handle_settings_dynamic(line)
+                case 'serialBytesize':
+                    self.handle_settings_dynamic(line)
+                case 'serialParity':
+                    self.handle_settings_dynamic(line)
+                case 'serialStopbits':
+                    self.handle_settings_dynamic(line)
+                case 'serialTimeout':
+                    self.handle_settings_dynamic(line)
 
     def handle_serial_command(self, line):
         """
@@ -152,7 +121,7 @@ class Sequence:
                 case 'close':
                     self.close_serial(line)
         except KeyError:
-            Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x101 Step not found. ' + format_exc())
         except (Exception, BaseException):
             print('Error 0x101 Undefined error in serial command. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
@@ -184,6 +153,30 @@ class Sequence:
         except (Exception, BaseException):
             print('Error 0x103 Undefined error in wait command. ' + format_exc())
             Logger.log_event(Logger(), 'Error 0x103 Undefined error in wait command. ' + format_exc())
+
+    def handle_settings_dynamic(self, line):
+        """
+        Handle the settings command.
+        :param line: Line read
+        :return:
+        """
+        try:
+            self.settings_dynamic(line)
+        except (Exception, BaseException):
+            print('Error 0x104 Undefined error in settings command. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x104 Undefined error in settings command. ' + format_exc())
+
+    def handle_settings_static(self, line):
+        """
+        Handle the settings command.
+        :param line: Line read
+        :return:
+        """
+        try:
+            self.settings_static(line)
+        except (Exception, BaseException):
+            print('Error 0x104 Undefined error in settings command. ' + format_exc())
+            Logger.log_event(Logger(), 'Error 0x104 Undefined error in settings command. ' + format_exc())
 
     @staticmethod
     def open_serial(line):
@@ -230,7 +223,7 @@ class Sequence:
         Login to iTAC.
         :return:
         """
-        Itac.login(Itac(globals()['station_number'], globals()['restApi']))
+        Itac.login(Itac(globals()['stationNumber'], globals()['restApi']))
 
     @staticmethod
     def logout_itac():
@@ -238,7 +231,7 @@ class Sequence:
         Logout from iTAC.
         :return:
         """
-        Itac.logout(Itac(globals()['station_number'], globals()['restApi']))
+        Itac.logout(Itac(globals()['stationNumber'], globals()['restApi']))
 
     @staticmethod
     def wait(line):
@@ -248,3 +241,23 @@ class Sequence:
         :return:
         """
         sleep(int(line.split(';')[4]))
+
+    @staticmethod
+    def settings_dynamic(line):
+        """
+        Set settings.
+        :param line: Line read
+        :return:
+        """
+        globals()[str(line.split(';')[1] + line.split(';')[2])] = line.split(';')[4]
+        pass
+
+    @staticmethod
+    def settings_static(line):
+        """
+        Set settings.
+        :param line: Line read
+        :return:
+        """
+        globals()[str(line.split(';')[1])] = line.split(';')[4]
+        pass
