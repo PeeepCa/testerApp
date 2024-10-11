@@ -25,9 +25,6 @@ class Sequence:
         file = open(file, 'r')
         sequence_file = file.read(-1).splitlines()
         file.close()
-        for i in range(len(sequence_file)):
-            lib.shared_variables.step_name = sequence_file[i]
-            sleep(0.1)
         return sequence_file
 
     def parse_sequence_file(self, file):
@@ -67,6 +64,8 @@ class Sequence:
         """
         for i in range(sequence_start + 1, sequence_end):
             self.process_sequence_line(sequence_file, i, thread_number)
+            lib.shared_variables.step_name = sequence_file[i]
+            sleep(0.1)
 
     def process_sequence_line(self, sequence_file, line_index, thread_number):
         """

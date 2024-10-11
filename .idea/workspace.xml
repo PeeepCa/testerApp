@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.061&#10;- Added docstrings">
-      <change afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.065&#10;- Basic UI and multithreading done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_variables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,12 +57,13 @@
     "com.codeium.enabled": "true",
     "com.google.cloudcode.ide_session_index": "20241001_0000",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp/lib",
+    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pokorny\OneDrive - APAG Elektronik s.r.o\Documents\GitHub\testerApp" />
       <recent name="C:\Users\pokorny\OneDrive - APAG Elektronik s.r.o\Documents\GitHub\testerApp\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -271,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728370938216</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="v0.065&#10;- Basic UI and multithreading done">
+      <option name="closed" value="true" />
+      <created>1728651327739</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1728651327740</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -301,6 +308,7 @@
     <MESSAGE value="v0.055&#10;- Reworked sequence calling&#10;- Added thread to sequence" />
     <MESSAGE value="v0.060&#10;- Reworked sequence library&#10;- Saved before deleting old functions" />
     <MESSAGE value="v0.061&#10;- Added docstrings" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.061&#10;- Added docstrings" />
+    <MESSAGE value="v0.065&#10;- Basic UI and multithreading done" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.065&#10;- Basic UI and multithreading done" />
   </component>
 </project>
