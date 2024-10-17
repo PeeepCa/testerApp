@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.065&#10;- Basic UI and multithreading done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/itac_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/itac_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/seso_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/seso_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,22 +48,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.config_library.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.reader_library.executor": "Run",
-    "Python.rs232_library.executor": "Run",
-    "Python.sequence_library.executor": "Run",
-    "Python.ui.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "com.google.cloudcode.ide_session_index": "20241001_0000",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.config_library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.reader_library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rs232_library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sequence_library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ui.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20241001_0000&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pokorny\OneDrive - APAG Elektronik s.r.o\Documents\GitHub\testerApp" />
@@ -278,7 +281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728651327740</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="v0.065&#10;- Basic UI and multithreading done">
+      <option name="closed" value="true" />
+      <created>1728652882850</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1728652882850</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

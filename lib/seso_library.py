@@ -22,6 +22,7 @@ class Seso:
         self.station_number = args[0]
         self.rest_api = args[1]
         self.timeout = 5
+        self.logger = Logger()
 
     def upload(self, *args):
         """
@@ -45,7 +46,7 @@ class Seso:
                            'module': description, 'ap': serial_number, 'result': status}
                 post(self.rest_api, data=payload, timeout=self.timeout, verify=False)
         except exceptions.MissingSchema:
-            Logger.log_event(Logger(), 'Wrong URL at upload.')
+            self.logger.log_event('Wrong URL at upload.')
             windll.user32.MessageBoxW(0, 'Error 0x401 URL for upload.', 'SESO Message', 0x1000)
 
     def operator_without_reader(self):
@@ -70,7 +71,7 @@ class Seso:
                 unlock = False
             return op_id, op_name, unlock, training
         except exceptions.MissingSchema:
-            Logger.log_event(Logger(), 'Wrong URL at operatorWithoutReader.')
+            self.logger.log_event('Wrong URL at operatorWithoutReader.')
             windll.user32.MessageBoxW(0, 'Error 0x402 URL for operatorWithoutReader.', 'SESO Message', 0x1000)
     
     def operator_with_reader(self, *args):
@@ -106,7 +107,7 @@ class Seso:
                 unlock = True
             return op_id, op_name, unlock, training
         except exceptions.MissingSchema:
-            Logger.log_event(Logger(), 'Wrong URL at operatorWithReader.')
+            self.logger.log_event('Wrong URL at operatorWithReader.')
             windll.user32.MessageBoxW(0, 'Error 0x403 URL for operatorWithReader.', 'SESO Message', 0x1000)
         except IndexError:
             return '0', '0', False, ''
@@ -131,7 +132,7 @@ class Seso:
                 logged = False
             return logged
         except exceptions.MissingSchema:
-            Logger.log_event(Logger(), 'Wrong URL at loginLogout.')
+            self.logger.log_event('Wrong URL at loginLogout.')
             windll.user32.MessageBoxW(0, 'Error 0x404 URL for loginLogout.', 'SESO Message', 0x1000)
     
     def update_prod_data(self):
@@ -179,5 +180,5 @@ class Seso:
                     curr_perf = 0
             return pass_count, fail_count, fpy, instruction_list, module, lrf, curr_perf
         except exceptions.MissingSchema:
-            Logger.log_event(Logger(), 'Wrong URL at updateProdData.')
+            self.logger.log_event('Wrong URL at updateProdData.')
             windll.user32.MessageBoxW(0, 'Error 0x405 URL for updateProdData.', 'SESO Message', 0x1000)

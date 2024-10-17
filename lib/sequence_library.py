@@ -13,7 +13,7 @@ class Sequence:
     Calling the sequence file to process it.
     """
     def __init__(self):
-        pass
+        self.logger = Logger()
 
     @staticmethod
     def read_sequence_file(file):
@@ -120,10 +120,10 @@ class Sequence:
                 case 'close':
                     self.close_serial(line)
         except KeyError:
-            Logger.log_event(Logger(), 'Error 0x101 Step not found. ' + format_exc())
+            self.logger.log_event('Error 0x101 Step not found. ' + format_exc())
         except (Exception, BaseException):
             print('Error 0x101 Undefined error in serial command. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x101 Undefined error in serial command. ' + format_exc())
+            self.logger.log_event('Error 0x101 Undefined error in serial command. ' + format_exc())
 
     def handle_itac_command(self, line):
         """
@@ -139,7 +139,7 @@ class Sequence:
                     self.logout_itac()
         except (Exception, BaseException):
             print('Error 0x102 Undefined error in itac command. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x102 Undefined error in itac command. ' + format_exc())
+            self.logger.log_event('Error 0x102 Undefined error in itac command. ' + format_exc())
 
     def handle_wait_command(self, line):
         """
@@ -163,7 +163,7 @@ class Sequence:
             self.settings_dynamic(line)
         except (Exception, BaseException):
             print('Error 0x104 Undefined error in settings command. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x104 Undefined error in settings command. ' + format_exc())
+            self.logger.log_event('Error 0x104 Undefined error in settings command. ' + format_exc())
 
     def handle_settings_static(self, line):
         """
@@ -175,7 +175,7 @@ class Sequence:
             self.settings_static(line)
         except (Exception, BaseException):
             print('Error 0x104 Undefined error in settings command. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x104 Undefined error in settings command. ' + format_exc())
+            self.logger.log_event('Error 0x104 Undefined error in settings command. ' + format_exc())
 
     @staticmethod
     def open_serial(line):
@@ -249,7 +249,6 @@ class Sequence:
         :return:
         """
         globals()[str(line.split(';')[1] + line.split(';')[2])] = line.split(';')[4]
-        pass
 
     @staticmethod
     def settings_static(line):
@@ -259,4 +258,3 @@ class Sequence:
         :return:
         """
         globals()[str(line.split(';')[1])] = line.split(';')[4]
-        pass

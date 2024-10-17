@@ -34,23 +34,23 @@ class App:
             self.application_path = path.dirname(__file__)
         else:
             self.application_path = None
+        self.sequence = Sequence()
 
-    @staticmethod
-    def test():
+    def test(self):
         """
         Test function
         :return:
         """
         # test procedure
-        parsed = Sequence.parse_sequence_file(Sequence(), 'sequence.csv')
+        parsed = self.sequence.parse_sequence_file('sequence.csv')
         # Settings
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[1][0], parsed[1][1], 1)
+        self.sequence.sequence_read(parsed[0], parsed[1][0], parsed[1][1], 1)
         # Preuut
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[2][0], parsed[2][1], 1)
+        self.sequence.sequence_read(parsed[0], parsed[2][0], parsed[2][1], 1)
         # Sequence
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[3][0], parsed[3][1], 1)
+        self.sequence.sequence_read(parsed[0], parsed[3][0], parsed[3][1], 1)
         # Postuut
-        Sequence.sequence_read(Sequence(), parsed[0], parsed[4][0], parsed[4][1], 1)
+        self.sequence.sequence_read(parsed[0], parsed[4][0], parsed[4][1], 1)
 
     @staticmethod
     def run_ui():

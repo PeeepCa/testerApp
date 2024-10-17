@@ -44,7 +44,7 @@ class Itac:
                     "client":"01",
                     "registrationType":"S",
                     "systemIdentifier":"Test"}}"""
-        js = loads(Itac.data_post(self, self.login, body))
+        js = loads(self.data_post(self.login, body))
         globals()['sessionId'] = str(js['result']['sessionContext']['sessionId'])
         globals()['persId'] = str(js['result']['sessionContext']['persId'])
         globals()['locale'] = str(js['result']['sessionContext']['locale'])
@@ -64,7 +64,7 @@ class Itac:
                     "serialNumber":""" + '"' + sn + '"' + """,
                     "serialNumberPos":"-1",
                     "serialNumberResultKeys": ["PART_NUMBER","PART_DESC","WORKORDER_NUMBER","SERIAL_NUMBER_POS"]}"""
-        data = loads(Itac.data_post(self, self.sn_info, body))['result']['serialNumberResultValues']
+        data = loads(self.data_post(self.sn_info, body))['result']['serialNumberResultValues']
         return data[0], data[1], data[2], data[3]
 
     def sn_state(self, sn):
@@ -84,7 +84,7 @@ class Itac:
                     "serialNumber":""" + '"' + sn + '"' + """,
                     "serialNumberPos":"-1",
                     "serialNumberStateResultKeys": ["ERROR_CODE"]}"""
-        status = str(loads(Itac.data_post(self, self.sn_state, body))['result']['serialNumberStateResultValues'][0])
+        status = str(loads(self.data_post(self.sn_state, body))['result']['serialNumberStateResultValues'][0])
         if status != '0' and status != '212':
             windll.user32.MessageBoxW(0, 'iTAC AOI ' + str(status), 'iTAC Message', 0x1000)
         return status
@@ -117,7 +117,7 @@ class Itac:
                     "resultUploadKeys": ["MEASURE_TYPE","ERROR_CODE","MEASURE_FAIL_CODE","UNIT","MEASURE_NAME",
                     "MEASURE_VALUE","LOWER_LIMIT","UPPER_LIMIT","TEST_STEP_NUMBER"],
                     "resultUploadValues": [""" + upload_values + """]}"""
-        Itac.data_post(self, self.upload, body)
+        self.data_post(self.upload, body)
 
     def get_result_data(self, sn):
         """
@@ -139,8 +139,7 @@ class Itac:
                     "allProductEntries":"0",
                     "onlyLastEntry":"0",
                     "resultDataKeys": ["MEASURE_VALUE"]}"""
-        print(body)
-        return loads(Itac.data_post(self, self.get_result_data, body))
+        return loads(self.data_post(self.get_result_data, body))
 
     def logout(self):
         """
@@ -151,7 +150,7 @@ class Itac:
                     {"sessionId":""" + globals()['sessionId'] + """,
                     "persId":""" + '"' + globals()['persId'] + '"' + """,
                     "locale":""" + '"' + globals()['locale'] + '"' + """}}"""
-        Itac.data_post(self, self.logout, body)
+        self.data_post(self.logout, body)
 
     # Modify sending all the iTAC through the single function
     def data_post(self, function, body):
