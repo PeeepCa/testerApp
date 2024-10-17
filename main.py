@@ -57,13 +57,10 @@ class App:
     def run_ui():
         UI.run(UI())
 
-    def run_test(self):
-        self.test()
-
     def run(self):
         t0 = Thread(target=App.run_ui)
         t0.start()
-        t1 = Thread(target=App.run_test, args=(self,))
+        t1 = Thread(target=self.test)
         t1.start()
 
 if __name__ == "__main__":
