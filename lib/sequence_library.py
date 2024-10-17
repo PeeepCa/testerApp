@@ -64,8 +64,6 @@ class Sequence:
         """
         for i in range(sequence_start + 1, sequence_end):
             self.process_sequence_line(sequence_file, i, thread_number)
-            lib.shared_variables.step_name = sequence_file[i]
-            sleep(0.1)
 
     def process_sequence_line(self, sequence_file, line_index, thread_number):
         """
@@ -75,6 +73,8 @@ class Sequence:
         :param thread_number: Thread number
         :return:
         """
+        lib.shared_variables.step_name = sequence_file[line_index]
+        sleep(0.1)
         line = sequence_file[line_index]
         if line.split(';')[0] == str(thread_number):
             match line.split(';')[1]:

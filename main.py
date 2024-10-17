@@ -27,7 +27,8 @@ from lib.ui import UI
 
 class App:
     def __init__(self):
-        Logger.log_event(Logger(), 'Logging started.')
+        self.logger = Logger()
+        self.logger.log_event('Logging started.')
         if getattr(sys, 'frozen', False):
             self.application_path = path.dirname(sys.executable)
         elif __file__:
