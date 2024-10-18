@@ -1,5 +1,3 @@
-import traceback
-
 import tkinter as tk
 
 import lib.shared_variables

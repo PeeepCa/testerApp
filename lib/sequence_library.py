@@ -151,7 +151,7 @@ class Sequence:
             self.wait(line)
         except (Exception, BaseException):
             print('Error 0x103 Undefined error in wait command. ' + format_exc())
-            Logger.log_event(Logger(), 'Error 0x103 Undefined error in wait command. ' + format_exc())
+            self.logger.log_event('Error 0x103 Undefined error in wait command. ' + format_exc())
 
     def handle_settings_dynamic(self, line):
         """

@@ -29,6 +29,7 @@ class Itac:
         self.restAPI = restapi
         self.function = None
         self.body = None
+        self.logger = Logger()
 
     def login(self):
         """
@@ -165,5 +166,5 @@ class Itac:
         if req.status_code != 200:
             windll.user32.MessageBoxW(0, 'Error 0x300 iTAC' + str(self.function) + 'problem ' +
                                       str(req.status_code), 'iTAC Message', 0x1000)
-            Logger.log_event(Logger(), 'Error 0x300 iTAC' + str(self.function) + 'problem ' + str(req.status_code))
+            self.logger.log_event('Error 0x300 iTAC' + str(self.function) + 'problem ' + str(req.status_code))
         return req.text
