@@ -16,6 +16,7 @@
 #  Results handling
 
 import sys
+import lib.shared_variables
 
 from os import path
 from threading import Thread
@@ -36,22 +37,32 @@ class App:
         else:
             self.application_path = None
         self.sequence = Sequence()
+        self.parsed_data = None
 
-    def test(self):
-        """
-        Test function
-        :return:
-        """
-        # test procedure
-        parsed = self.sequence.parse_sequence_file('sequence.csv')
-        # Settings
-        self.sequence.sequence_read(parsed[0], parsed[1][0], parsed[1][1], 1)
-        # Preuut
-        self.sequence.sequence_read(parsed[0], parsed[2][0], parsed[2][1], 1)
-        # Sequence
-        self.sequence.sequence_read(parsed[0], parsed[3][0], parsed[3][1], 1)
-        # Postuut
-        self.sequence.sequence_read(parsed[0], parsed[4][0], parsed[4][1], 1)
+    def run_sequence(self):
+        while not lib.shared_variables.app_exit:
+            match lib.shared_variables.program_status:
+                case 'PREUUT':
+                    self.preuut()
+                case 'SEQUENCE':
+                    self.main_sequence()
+                case 'POSTUUT':
+                    self.postuut()
+
+    def preuut(self):
+        self.parsed_data = self.sequence.parse_sequence_file(lib.shared_variables.sequence_file)
+        self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[1][0], self.parsed_data[1][1], 1)
+        self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[2][0], self.parsed_data[2][1], 1)
+        lib.shared_variables.program_status = None
+
+    def main_sequence(self):
+        while lib.shared_variables.main_run:
+            self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[3][0], self.parsed_data[3][1], 1)
+
+    def postuut(self):
+        self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[4][0], self.parsed_data[4][1], 1)
+        lib.shared_variables.program_status = None
+        lib.shared_variables.app_exit = True
 
     @staticmethod
     def run_ui():
@@ -60,7 +71,7 @@ class App:
     def run(self):
         t0 = Thread(target=App.run_ui)
         t0.start()
-        t1 = Thread(target=self.test)
+        t1 = Thread(target=self.run_sequence)
         t1.start()
 
 if __name__ == "__main__":

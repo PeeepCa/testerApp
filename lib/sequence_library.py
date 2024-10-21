@@ -74,7 +74,7 @@ class Sequence:
         :return:
         """
         lib.shared_variables.step_name = sequence_file[line_index]
-        sleep(0.1)
+        print(sequence_file[line_index])
         line = sequence_file[line_index]
         if line.split(';')[0] == str(thread_number):
             match line.split(';')[1]:

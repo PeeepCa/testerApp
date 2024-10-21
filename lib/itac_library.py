@@ -167,4 +167,5 @@ class Itac:
             windll.user32.MessageBoxW(0, 'Error 0x300 iTAC' + str(self.function) + 'problem ' +
                                       str(req.status_code), 'iTAC Message', 0x1000)
             self.logger.log_event('Error 0x300 iTAC' + str(self.function) + 'problem ' + str(req.status_code))
+        print(req.text)
         return req.text
