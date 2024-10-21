@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.071&#10;- Started with UI&#10;- Added status bar dummy and file menu dummy">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/itac_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/itac_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shared_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_variables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -329,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729245485908</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions">
+      <option name="closed" value="true" />
+      <created>1729501761351</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1729501761351</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,6 +369,7 @@
     <MESSAGE value="v0.065&#10;- Basic UI and multithreading done" />
     <MESSAGE value="v0.07&#10;- Minor fixes in code" />
     <MESSAGE value="v0.071&#10;- Started with UI&#10;- Added status bar dummy and file menu dummy" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.071&#10;- Started with UI&#10;- Added status bar dummy and file menu dummy" />
+    <MESSAGE value="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions" />
   </component>
 </project>

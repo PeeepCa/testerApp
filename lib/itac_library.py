@@ -153,7 +153,7 @@ class Itac:
                     "locale":""" + '"' + globals()['locale'] + '"' + """}}"""
         self.data_post(self.logout, body)
 
-    # Modify sending all the iTAC through the single function
+    # All the commands for iTAC send through the single function
     def data_post(self, function, body):
         """
         Send data to server

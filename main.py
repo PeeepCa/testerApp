@@ -1,6 +1,8 @@
+# error 0x000 Main error
+
 # TODO:
 #  ** Multithreading for parallel testing - Done
-#  GUI with dynamic UI for testing
+#  ** GUI with dynamic UI for testing - Partially
 #  ** Config file stored on server - Done
 #  Auto updating like PEPO
 #  ** Logging to server log file - reused from PEPO
@@ -16,6 +18,7 @@
 #  Results handling
 
 import sys
+
 import lib.shared_variables
 
 from os import path
@@ -36,18 +39,28 @@ class App:
             self.application_path = path.dirname(__file__)
         else:
             self.application_path = None
+        lib.shared_variables.application_path = self.application_path
         self.sequence = Sequence()
         self.parsed_data = None
 
     def run_sequence(self):
-        while not lib.shared_variables.app_exit:
-            match lib.shared_variables.program_status:
-                case 'PREUUT':
-                    self.preuut()
-                case 'SEQUENCE':
-                    self.main_sequence()
-                case 'POSTUUT':
-                    self.postuut()
+        try:
+            while not lib.shared_variables.app_exit:
+                with lib.shared_variables.shared_condition:
+                    if lib.shared_variables.program_status is not None and lib.shared_variables.sequence_file is not None:
+                        match lib.shared_variables.program_status:
+                            case 'PREUUT':
+                                self.preuut()
+                            case 'SEQUENCE':
+                                self.main_sequence()
+                            case 'POSTUUT':
+                                self.postuut()
+                    else:
+                        print('Waiting...')
+                        lib.shared_variables.shared_condition.wait()
+        except Exception as e:
+            self.logger.log_event('Error 0x000 ' + str(e))
+            raise e
 
     def preuut(self):
         self.parsed_data = self.sequence.parse_sequence_file(lib.shared_variables.sequence_file)
@@ -73,6 +86,9 @@ class App:
         t0.start()
         t1 = Thread(target=self.run_sequence)
         t1.start()
+        t0.join()  # Wait for UI thread to finish
+        t1.join()  # Wait for sequence thread to finish
+        self.logger.log_event('Application exited successfully.')
 
 if __name__ == "__main__":
     app = App()

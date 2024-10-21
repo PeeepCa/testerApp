@@ -1,4 +1,5 @@
 # Shared variables
+from threading import Condition
 
 useITAC = None
 serial_number = None
@@ -13,3 +14,6 @@ program_status = None
 main_run = False
 # App exit
 app_exit = False
+
+application_path = None
+shared_condition = Condition()
