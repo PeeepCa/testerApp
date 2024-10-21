@@ -18,6 +18,7 @@ class UI:
         self.file_menu = None
         self.run_button = None
         self.stop_button = None
+        self.step_name = None
         self.update_interval = 100  # 1000 milliseconds = 1 second
         self.application_path = lib.shared_variables.application_path
 
@@ -70,6 +71,10 @@ class UI:
             self.stop_button = ttk.Button(self.root, text="Stop", command=self.stop_button_click)
             self.stop_button.place(x=535, y=440, anchor="center")
 
+            # Create label with step name
+            self.step_name = ttk.Label(self.root, text="Step name: " + str(lib.shared_variables.step_name))
+            self.step_name.place(x=320, y=360, anchor="center")
+
     @staticmethod
     def open():
         with lib.shared_variables.shared_condition:
@@ -77,30 +82,38 @@ class UI:
             lib.shared_variables.program_status = 'PREUUT'
             lib.shared_variables.shared_condition.notify()
 
-    @staticmethod
-    def run_button_click():
+    def run_button_click(self):
         with lib.shared_variables.shared_condition:
+            self.menubar.entryconfig('File', state='disabled')
+            self.menubar.entryconfig('View', state='disabled')
+            self.menubar.entryconfig('Help', state='disabled')
+            self.run_button.config(state='disabled')
             lib.shared_variables.main_run = True
             lib.shared_variables.program_status = 'SEQUENCE'
             lib.shared_variables.shared_condition.notify()
 
-    @staticmethod
-    def stop_button_click():
+    def stop_button_click(self):
+        self.menubar.entryconfig('File', state='normal')
+        self.menubar.entryconfig('View', state='normal')
+        self.menubar.entryconfig('Help', state='normal')
+        self.run_button.config(state='normal')
         lib.shared_variables.main_run = False
         lib.shared_variables.program_status = None
 
     def exit_app(self):
         with lib.shared_variables.shared_condition:
             lib.shared_variables.program_run = False
+            lib.shared_variables.main_run = False
+            lib.shared_variables.shared_condition.notify()
             lib.shared_variables.program_status = 'POSTUUT'
             lib.shared_variables.app_exit = True
-            lib.shared_variables.shared_condition.notify()
             self.root.quit()
             self.root.destroy()
 
     def update_text(self):
         self.serial_number['text'] = "Serial number: " + str(lib.shared_variables.serial_number)
         self.progressbar['value'] = int(lib.shared_variables.progress_bar)
+        self.step_name['text'] = "Step name: " + str(lib.shared_variables.step_name)
         self.root.after(self.update_interval, self.update_text)
 
     def run(self):

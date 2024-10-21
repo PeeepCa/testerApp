@@ -120,10 +120,10 @@ class Sequence:
                 case 'close':
                     self.close_serial(line)
         except KeyError:
-            self.logger.log_event('Error 0x101 Step not found. ' + format_exc())
+            self.logger.log_event('Error 0x201 Step not found. ' + format_exc())
         except (Exception, BaseException):
-            print('Error 0x101 Undefined error in serial command. ' + format_exc())
-            self.logger.log_event('Error 0x101 Undefined error in serial command. ' + format_exc())
+            print('Error 0x201 Undefined error in serial command. ' + format_exc())
+            self.logger.log_event('Error 0x201 Undefined error in serial command. ' + format_exc())
 
     def handle_itac_command(self, line):
         """
@@ -138,8 +138,8 @@ class Sequence:
                 case 'logout':
                     self.logout_itac()
         except (Exception, BaseException):
-            print('Error 0x102 Undefined error in itac command. ' + format_exc())
-            self.logger.log_event('Error 0x102 Undefined error in itac command. ' + format_exc())
+            print('Error 0x202 Undefined error in itac command. ' + format_exc())
+            self.logger.log_event('Error 0x202 Undefined error in itac command. ' + format_exc())
 
     def handle_wait_command(self, line):
         """
@@ -150,8 +150,8 @@ class Sequence:
         try:
             self.wait(line)
         except (Exception, BaseException):
-            print('Error 0x103 Undefined error in wait command. ' + format_exc())
-            self.logger.log_event('Error 0x103 Undefined error in wait command. ' + format_exc())
+            print('Error 0x203 Undefined error in wait command. ' + format_exc())
+            self.logger.log_event('Error 0x203 Undefined error in wait command. ' + format_exc())
 
     def handle_settings_dynamic(self, line):
         """
@@ -162,8 +162,8 @@ class Sequence:
         try:
             self.settings_dynamic(line)
         except (Exception, BaseException):
-            print('Error 0x104 Undefined error in settings command. ' + format_exc())
-            self.logger.log_event('Error 0x104 Undefined error in settings command. ' + format_exc())
+            print('Error 0x204 Undefined error in settings command. ' + format_exc())
+            self.logger.log_event('Error 0x204 Undefined error in settings command. ' + format_exc())
 
     def handle_settings_static(self, line):
         """
@@ -174,8 +174,8 @@ class Sequence:
         try:
             self.settings_static(line)
         except (Exception, BaseException):
-            print('Error 0x104 Undefined error in settings command. ' + format_exc())
-            self.logger.log_event('Error 0x104 Undefined error in settings command. ' + format_exc())
+            print('Error 0x204 Undefined error in settings command. ' + format_exc())
+            self.logger.log_event('Error 0x204 Undefined error in settings command. ' + format_exc())
 
     @staticmethod
     def open_serial(line):

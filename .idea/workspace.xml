@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/itac_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/itac_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_variables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config_library.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -47,22 +48,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.config_library.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.reader_library.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rs232_library.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sequence_library.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ui.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20241001_0000&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp/lib&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.config_library.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.reader_library.executor": "Run",
+    "Python.rs232_library.executor": "Run",
+    "Python.sequence_library.executor": "Run",
+    "Python.ui.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.codeium.enabled": "true",
+    "com.google.cloudcode.ide_session_index": "20241001_0000",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp - Copy",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pokorny\OneDrive - APAG Elektronik s.r.o\Documents\GitHub\testerApp\lib" />
@@ -336,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729501761351</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI">
+      <option name="closed" value="true" />
+      <created>1729520168483</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1729520168483</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -370,6 +379,7 @@
     <MESSAGE value="v0.07&#10;- Minor fixes in code" />
     <MESSAGE value="v0.071&#10;- Started with UI&#10;- Added status bar dummy and file menu dummy" />
     <MESSAGE value="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions" />
+    <MESSAGE value="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI" />
   </component>
 </project>

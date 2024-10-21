@@ -1,4 +1,11 @@
 # error 0x000 Main error
+# error 0x100 UI error
+# error 0x200 Sequence error
+# error 0x300 itac error
+# error 0x400 seso error
+# error 0x500 rs232 error
+# error 0x600 lan error
+
 
 # TODO:
 #  ** Multithreading for parallel testing - Done
@@ -63,14 +70,19 @@ class App:
             raise e
 
     def preuut(self):
-        self.parsed_data = self.sequence.parse_sequence_file(lib.shared_variables.sequence_file)
-        self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[1][0], self.parsed_data[1][1], 1)
-        self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[2][0], self.parsed_data[2][1], 1)
-        lib.shared_variables.program_status = None
+        try:
+            self.parsed_data = self.sequence.parse_sequence_file(lib.shared_variables.sequence_file)
+            self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[1][0], self.parsed_data[1][1], 1)
+            self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[2][0], self.parsed_data[2][1], 1)
+            lib.shared_variables.program_status = None
+        except FileNotFoundError:
+            # if you cancel the open file dialog
+            pass
 
     def main_sequence(self):
         while lib.shared_variables.main_run:
             self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[3][0], self.parsed_data[3][1], 1)
+
 
     def postuut(self):
         self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[4][0], self.parsed_data[4][1], 1)

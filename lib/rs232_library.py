@@ -38,9 +38,9 @@ class Rs232:
             status = 0
         except serialutil.SerialException:
             if globals()['msg_show'] == 1:
-                windll.user32.MessageBoxW(0, 'Error 0x200 RS232 reader at: ' + self.COM + ' cannot be found.',
+                windll.user32.MessageBoxW(0, 'Error 0x500 RS232 reader at: ' + self.COM + ' cannot be found.',
                                           'HW Error', 0x1000)
-                self.logger.log_event('Error 0x200 RS232 reader at ' + self.COM +
+                self.logger.log_event('Error 0x500 RS232 reader at ' + self.COM +
                                  ' cannot be found' + format_exc())
             status = 1
         return  status
