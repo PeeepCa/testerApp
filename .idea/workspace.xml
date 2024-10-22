@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.081&#10;- Fixed some bugs in controls">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config_library.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -60,7 +57,7 @@
     "com.codeium.enabled": "true",
     "com.google.cloudcode.ide_session_index": "20241001_0000",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp - Copy",
+    "last_opened_file_path": "C:/Users/pokorny/OneDrive - APAG Elektronik s.r.o/Documents/GitHub/testerApp",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -345,7 +342,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729520168483</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="v0.081&#10;- Fixed some bugs in controls">
+      <option name="closed" value="true" />
+      <created>1729524593632</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1729524593633</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -380,6 +385,7 @@
     <MESSAGE value="v0.071&#10;- Started with UI&#10;- Added status bar dummy and file menu dummy" />
     <MESSAGE value="v0.073&#10;- Progress in UI&#10;- Added main function to replace test functions" />
     <MESSAGE value="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.08&#10;- Fixed multithreading timing&#10;- Improved error handling&#10;- Improved UI" />
+    <MESSAGE value="v0.081&#10;- Fixed some bugs in controls" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.081&#10;- Fixed some bugs in controls" />
   </component>
 </project>

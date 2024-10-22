@@ -83,7 +83,6 @@ class App:
         while lib.shared_variables.main_run:
             self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[3][0], self.parsed_data[3][1], 1)
 
-
     def postuut(self):
         self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[4][0], self.parsed_data[4][1], 1)
         lib.shared_variables.program_status = None
