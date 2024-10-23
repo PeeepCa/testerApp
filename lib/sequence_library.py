@@ -110,6 +110,8 @@ class Sequence:
                     self.handle_settings_dynamic(line)
                 case 'checkResults':
                     self.check_results_command()
+                case 'clearResults':
+                    self.clear_results_command()
 
     def handle_serial_command(self, line):
         """
@@ -198,9 +200,11 @@ class Sequence:
         :param line: Line read
         :return:
         """
-        globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2])))
+        globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2]), int(line.split(';')[6])))
         if str(line.split(';')[5]) == 'serial_number':
             lib.shared_variables.serial_number = globals()[str('serial_number')]
+            if lib.shared_variables.serial_number is None or lib.shared_variables.serial_number == '' or lib.shared_variables.serial_number == 'ERROR':
+                raise Exception('Serial number not found.')
 
     @staticmethod
     def close_serial(line):
@@ -260,5 +264,22 @@ class Sequence:
         Check results.
         :return:
         """
+        result = 0
         for i in range (0, len(lib.shared_variables.result_list)):
             print(lib.shared_variables.result_list[i])
+            result += lib.shared_variables.result_list[i]
+        if result == 0:
+            lib.shared_variables.test_result = 'PASS'
+        else:
+            lib.shared_variables.test_result = 'FAIL'
+
+    @staticmethod
+    def clear_results_command():
+        """
+        Clear results.
+        :return:
+        """
+        lib.shared_variables.result_list.clear()
+        lib.shared_variables.test_result = None
+        lib.shared_variables.serial_number = None
+

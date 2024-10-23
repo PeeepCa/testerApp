@@ -18,4 +18,6 @@ app_exit = False
 application_path = None
 shared_condition = Condition()
 
+# Results
 result_list = []
+test_result = None

@@ -75,6 +75,7 @@ class App:
             self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[1][0], self.parsed_data[1][1], 1)
             self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[2][0], self.parsed_data[2][1], 1)
             lib.shared_variables.program_status = None
+            lib.shared_variables.result_list.clear()
         except FileNotFoundError:
             # if you cancel the open file dialog
             pass
@@ -87,6 +88,7 @@ class App:
         if lib.shared_variables.sequence_file is not None:
             self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[4][0], self.parsed_data[4][1], 1)
         lib.shared_variables.program_status = None
+        lib.shared_variables.result_list.clear()
         lib.shared_variables.app_exit = True
 
     @staticmethod

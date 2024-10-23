@@ -1,6 +1,6 @@
-﻿sep=;
-#thread number;##function;##number of port;##function parameter;command or value;##variable name
-[SETTINGS];;;;;
+﻿sep=;;;;;;
+#thread number;function;number of port;function parameter;command or value;variable name; misc
+[SETTINGS];;;;;;
 1;stationNumber;;;40010011;
 1;processLayer;;;0;
 1;restApi;;;http://acz-itac/mes/imsapi/rest/actions/;
@@ -9,20 +9,21 @@
 1;serialBaud;1;;115200;
 1;serialBytesize;1;;8;
 1;serialParity;1;;E;
-1;serialStopbits;1;;1;
-1;serialTimeout;1;;1;
+1;serialStopbits;1;;1;;
+1;serialTimeout;1;;5;
 [SETTINGS_END];;;;;
 [PREUUT];;;;;
 1;serial;1;open;;
 1;itac;;login;;
-[PREUUT_END];;;;;
+[PREUUT_END];;;;;;
 [SEQUENCE];;;;;
 ##READER;;;;;
-1;wait;;;1;
 1;serial;1;write;LON\r;
-1;serial;1;read;;serial_number
+1;serial;1;read;;serial_number;13
 1;serial;1;write;LOFF\r;
 1;checkResults;;;;;
+1;wait;;;5;
+1;clearResults;;;;;
 [SEQUENCE_END];;;;;
 [POSTUUT];;;;;
 1;serial;1;close;;

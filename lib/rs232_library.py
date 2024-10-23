@@ -53,20 +53,24 @@ class Rs232:
         try:
             command = command.encode('utf-8').replace(b'\\r', b'\r')
             globals()['ser' + str(com_number)].write(command)
+            globals()['ser' + str(com_number)].flushInput()
         except serialutil.SerialException as e:
             self.logger.log_event('RS232 reader trying to reconnect. ' + format_exc())
             raise e
 
-    def read(self, com_number):
+    def read(self, com_number, length):
         """
         RS232 read
         :param com_number: COM number
+        :param length: bytes to read
         :return: serial_string
         """
         try:
             # TODO: switch after implementation
-            serial_string = globals()['ser' + str(com_number)].readline()
+
+            serial_string = globals()['ser' + str(com_number)].readline(length)
             # serial_string = globals()['ser' + str(com_number)].read_until(b'\r\n', 8)
+            globals()['ser' + str(com_number)].flushOutput()
         except serialutil.SerialException as e:
             self.logger.log_event('RS232 reader trying to reconnect. ' + format_exc())
             raise e
