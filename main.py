@@ -21,8 +21,8 @@
 #  ** Sequence implementation for testing - Done
 #  Selftest for relay cards
 #  Relay control from tab in app
-#  Results implementation
-#  Results handling
+#  ** Results implementation - Done
+#  ** Results handling - Done
 
 import sys
 

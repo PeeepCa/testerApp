@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.085&#10;- Fixed issues and added status for each step">
+    <list default="true" id="fb7701bf-26d4-408a-828e-df57e030c2b3" name="Changes" comment="v0.085&#10;- New feature result and clear buffers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/rs232_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rs232_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sequence_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sequence_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared_variables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sequence.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sequence.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -370,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729689093207</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="v0.085&#10;- New feature result and clear buffers">
+      <option name="closed" value="true" />
+      <created>1729697274596</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1729697274596</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -408,6 +411,7 @@
     <MESSAGE value="v0.081&#10;- Fixed some bugs in controls" />
     <MESSAGE value="v0.082&#10;- Fixed issue with exit button" />
     <MESSAGE value="v0.085&#10;- Fixed issues and added status for each step" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.085&#10;- Fixed issues and added status for each step" />
+    <MESSAGE value="v0.085&#10;- New feature result and clear buffers" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.085&#10;- New feature result and clear buffers" />
   </component>
 </project>
