@@ -1,6 +1,5 @@
 import tkinter as tk
 
-from threading import Condition
 from tkinter import ttk
 from tkinter import filedialog
 
@@ -24,7 +23,6 @@ class UI:
 
         self.root.protocol("WM_DELETE_WINDOW", self.exit_app)
 
-        self.condition = Condition()
         self.build_main_window()
         self.update_text()
 

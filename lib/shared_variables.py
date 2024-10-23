@@ -17,3 +17,5 @@ app_exit = False
 
 application_path = None
 shared_condition = Condition()
+
+result_list = []

@@ -63,7 +63,14 @@ class Sequence:
         :return:
         """
         for i in range(sequence_start + 1, sequence_end):
-            self.process_sequence_line(sequence_file, i, thread_number)
+            try:
+                self.process_sequence_line(sequence_file, i, thread_number)
+                lib.shared_variables.result_list.append(0)
+                print(sequence_file[i])
+            except (Exception, BaseException):
+                lib.shared_variables.result_list.append(1)
+                print(sequence_file[i])
+                print(format_exc())
 
     def process_sequence_line(self, sequence_file, line_index, thread_number):
         """
@@ -74,7 +81,6 @@ class Sequence:
         :return:
         """
         lib.shared_variables.step_name = sequence_file[line_index]
-        print(sequence_file[line_index])
         line = sequence_file[line_index]
         if line.split(';')[0] == str(thread_number):
             match line.split(';')[1]:
@@ -102,6 +108,8 @@ class Sequence:
                     self.handle_settings_dynamic(line)
                 case 'serialTimeout':
                     self.handle_settings_dynamic(line)
+                case 'checkResults':
+                    self.check_results_command()
 
     def handle_serial_command(self, line):
         """
@@ -121,9 +129,6 @@ class Sequence:
                     self.close_serial(line)
         except KeyError:
             self.logger.log_event('Error 0x201 Step not found. ' + format_exc())
-        except (Exception, BaseException):
-            print('Error 0x201 Undefined error in serial command. ' + format_exc())
-            self.logger.log_event('Error 0x201 Undefined error in serial command. ' + format_exc())
 
     def handle_itac_command(self, line):
         """
@@ -131,15 +136,11 @@ class Sequence:
         :param line: Line read
         :return:
         """
-        try:
-            match line.split(';')[3]:
-                case 'login':
-                    self.login_itac()
-                case 'logout':
-                    self.logout_itac()
-        except (Exception, BaseException):
-            print('Error 0x202 Undefined error in itac command. ' + format_exc())
-            self.logger.log_event('Error 0x202 Undefined error in itac command. ' + format_exc())
+        match line.split(';')[3]:
+            case 'login':
+                self.login_itac()
+            case 'logout':
+                self.logout_itac()
 
     def handle_wait_command(self, line):
         """
@@ -147,11 +148,7 @@ class Sequence:
         :param line: Line read
         :return:
         """
-        try:
-            self.wait(line)
-        except (Exception, BaseException):
-            print('Error 0x203 Undefined error in wait command. ' + format_exc())
-            self.logger.log_event('Error 0x203 Undefined error in wait command. ' + format_exc())
+        self.wait(line)
 
     def handle_settings_dynamic(self, line):
         """
@@ -161,9 +158,9 @@ class Sequence:
         """
         try:
             self.settings_dynamic(line)
-        except (Exception, BaseException):
-            print('Error 0x204 Undefined error in settings command. ' + format_exc())
+        except (Exception, BaseException) as e:
             self.logger.log_event('Error 0x204 Undefined error in settings command. ' + format_exc())
+            raise e
 
     def handle_settings_static(self, line):
         """
@@ -173,19 +170,19 @@ class Sequence:
         """
         try:
             self.settings_static(line)
-        except (Exception, BaseException):
-            print('Error 0x204 Undefined error in settings command. ' + format_exc())
+        except (Exception, BaseException) as e:
             self.logger.log_event('Error 0x204 Undefined error in settings command. ' + format_exc())
+            raise e
 
     @staticmethod
     def open_serial(line):
-        lib.shared_variables.status += Rs232.open(Rs232(globals()['serialCom' + line.split(';')[2]],
-                                                             int(globals()['serialBaud' + line.split(';')[2]]),
-                                                             int(globals()['serialBytesize' + line.split(';')[2]]),
-                                                             globals()['serialParity' + line.split(';')[2]],
-                                                             int(globals()['serialStopbits' + line.split(';')[2]]),
-                                                             int(globals()['serialTimeout' + line.split(';')[2]])),
-                                                       line.split(';')[2])
+        Rs232.open(Rs232(globals()['serialCom' + line.split(';')[2]],
+                 int(globals()['serialBaud' + line.split(';')[2]]),
+                 int(globals()['serialBytesize' + line.split(';')[2]]),
+                 globals()['serialParity' + line.split(';')[2]],
+                 int(globals()['serialStopbits' + line.split(';')[2]]),
+                 int(globals()['serialTimeout' + line.split(';')[2]])),
+           line.split(';')[2])
 
     def write_serial(self, line):
         """
@@ -193,8 +190,7 @@ class Sequence:
         :param line: Line read
         :return:
         """
-        lib.shared_variables.status += Rs232.write(self, str(line.split(';')[4]),
-                                                   line.split(';')[2])
+        Rs232.write(self, str(line.split(';')[4]), line.split(';')[2])
 
     def read_serial(self, line):
         """
@@ -202,8 +198,7 @@ class Sequence:
         :param line: Line read
         :return:
         """
-        status, globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2])))
-        lib.shared_variables.status += status
+        globals()[str(line.split(';')[5])] = (Rs232.read(self, str(line.split(';')[2])))
         if str(line.split(';')[5]) == 'serial_number':
             lib.shared_variables.serial_number = globals()[str('serial_number')]
 
@@ -258,3 +253,12 @@ class Sequence:
         :return:
         """
         globals()[str(line.split(';')[1])] = line.split(';')[4]
+
+    @staticmethod
+    def check_results_command():
+        """
+        Check results.
+        :return:
+        """
+        for i in range (0, len(lib.shared_variables.result_list)):
+            print(lib.shared_variables.result_list[i])

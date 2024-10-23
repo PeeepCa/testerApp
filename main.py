@@ -62,12 +62,12 @@ class App:
                                 self.main_sequence()
                             case 'POSTUUT':
                                 self.postuut()
+                    elif lib.shared_variables.sequence_file is None and lib.shared_variables.program_status == 'POSTUUT':
+                        self.postuut()
                     else:
-                        print('Waiting...')
                         lib.shared_variables.shared_condition.wait()
         except Exception as e:
             self.logger.log_event('Error 0x000 ' + str(e))
-            raise e
 
     def preuut(self):
         try:
@@ -84,7 +84,8 @@ class App:
             self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[3][0], self.parsed_data[3][1], 1)
 
     def postuut(self):
-        self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[4][0], self.parsed_data[4][1], 1)
+        if lib.shared_variables.sequence_file is not None:
+            self.sequence.sequence_read(self.parsed_data[0], self.parsed_data[4][0], self.parsed_data[4][1], 1)
         lib.shared_variables.program_status = None
         lib.shared_variables.app_exit = True
 
